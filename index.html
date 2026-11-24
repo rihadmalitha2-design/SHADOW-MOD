@@ -1,0 +1,2714 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀 — Gaming Panel & Digital Service Platform</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Hind Siliguri for clean Bengali + English typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for crisp gaming & UI icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Hind Siliguri', 'sans-serif'],
+                    },
+                    colors: {
+                        space: {
+                            950: '#050811',
+                            900: '#090e1c',
+                            850: '#0e1528',
+                            800: '#131d36',
+                            700: '#1d2b4d',
+                        }
+                    },
+                    animation: {
+                        'marquee': 'marquee 28s linear infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar & Starfield Styling */
+        body {
+            background-color: #060914;
+            color: #f8fafc;
+            font-family: 'Inter', 'Hind Siliguri', sans-serif;
+            overflow-x: hidden;
+        }
+
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .glass-card {
+            background: rgba(14, 21, 40, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 78, 128, 0.35);
+        }
+
+        .glass-card-hover {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-4px);
+            border-color: rgba(79, 70, 229, 0.7);
+            box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.3);
+        }
+
+        .neon-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #4f46e5 100%);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
+            transition: all 0.2s ease;
+        }
+
+        .neon-btn:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #4338ca 100%);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.55);
+            transform: translateY(-1px);
+        }
+
+        .crimson-btn {
+            background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+            box-shadow: 0 4px 15px rgba(225, 29, 72, 0.35);
+            transition: all 0.2s ease;
+        }
+
+        .crimson-btn:hover {
+            background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+            box-shadow: 0 6px 20px rgba(225, 29, 72, 0.55);
+        }
+
+        /* Hide scrollbars cleanly where needed */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Marquee pause on hover */
+        .marquee-wrapper:hover .animate-marquee {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative selection:bg-indigo-600 selection:text-white">
+
+    <!-- Animated Starfield Background -->
+    <canvas id="starfield"></canvas>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed top-20 right-4 z-[100] flex flex-col gap-2.5 max-w-sm w-full pointer-events-none"></div>
+
+    <!-- ==========================================
+         TOP NAVIGATION BAR
+    =========================================== -->
+    <header class="sticky top-0 z-40 w-full bg-[#080c1a]/90 backdrop-blur-md border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <button onclick="navigateTo('home')" class="flex items-center gap-2.5 group focus:outline-none text-left">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-500 p-[1.5px] shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-[#090e1c] rounded-[10px] flex items-center justify-center">
+                        <i class="fa-solid fa-skull text-lg text-cyan-400 group-hover:text-white transition-colors"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-base sm:text-lg font-extrabold tracking-wide text-white leading-tight flex items-center gap-1">
+                        💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀
+                    </span>
+                    <span class="text-[10px] font-semibold tracking-widest uppercase text-indigo-400">Official Panel Store</span>
+                </div>
+            </button>
+
+            <!-- Right Navigation Actions -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <button onclick="navigateTo('home')" class="hidden md:inline-flex items-center text-sm font-medium text-slate-300 hover:text-white px-2.5 py-1.5 rounded-lg hover:bg-slate-800/60 transition">
+                    Topup
+                </button>
+                <button onclick="navigateTo('contact')" class="hidden md:inline-flex items-center text-sm font-medium text-slate-300 hover:text-white px-2.5 py-1.5 rounded-lg hover:bg-slate-800/60 transition">
+                    Contact Us
+                </button>
+
+                <!-- Admin Panel Quick Button (Visible ONLY when Admin is logged in) -->
+                <button id="headerAdminBtn" onclick="navigateTo('admin')" class="hidden items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-600/20 hover:bg-rose-600/35 border border-rose-500/50 text-rose-300 text-xs font-extrabold tracking-wide transition shadow-md">
+                    <i class="fa-solid fa-crown text-amber-400"></i>
+                    <span class="hidden sm:inline">শ্যাডো মোড অ্যাডমিন প্যানেল</span>
+                    <span class="sm:hidden">Admin</span>
+                </button>
+
+                <!-- Wallet Balance Pill -->
+                <button id="headerWalletBtn" onclick="navigateTo('add-fund')" title="Click to Add Fund" class="flex items-center gap-2 bg-[#131d36] hover:bg-[#1a2747] border border-indigo-500/40 text-white px-3.5 py-1.5 rounded-full text-sm font-bold shadow-inner transition active:scale-95">
+                    <i class="fa-solid fa-wallet text-indigo-400 text-xs"></i>
+                    <span id="navBalance">৳ 0</span>
+                </button>
+
+                <!-- Login Button (Shown when logged out) -->
+                <button id="headerLoginBtn" onclick="openAuthModal('login')" class="hidden neon-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-extrabold text-white items-center gap-1.5">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login
+                </button>
+
+                <!-- User Profile Avatar Button (Shown when logged in) -->
+                <button id="headerAvatarBtn" onclick="toggleUserDrawer(true)" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-amber-500 to-orange-600 text-white font-extrabold text-sm flex items-center justify-center ring-2 ring-indigo-500/40 hover:ring-indigo-400 transition shadow-md">
+                    <span id="navAvatarInitial">S</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         MAIN CONTENT CONTAINER (SPA VIEWS)
+    =========================================== -->
+    <main class="flex-1 relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">
+
+        <!-- ==================== VIEW 1: HOME STORE ==================== -->
+        <section id="view-home" class="space-y-6">
+            <!-- Announcement Ticker -->
+            <div class="glass-card rounded-xl px-3 py-2.5 flex items-center gap-3 overflow-hidden border-indigo-500/30">
+                <div class="shrink-0 w-7 h-7 rounded-lg bg-indigo-600/30 border border-indigo-500/50 flex items-center justify-center text-indigo-400">
+                    <i class="fa-solid fa-bullhorn text-xs"></i>
+                </div>
+                <div class="marquee-wrapper overflow-hidden flex-1 relative">
+                    <div id="announcementTickerText" class="animate-marquee whitespace-nowrap flex items-center gap-8 text-xs sm:text-sm font-medium text-slate-200">
+                        <span>⚡ Trusted, Fast & Reliable Service with 24/7 Support</span>
+                        <span class="text-indigo-400">•</span>
+                        <span>💎 Your Satisfaction Is Our Priority! — 💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀</span>
+                        <span class="text-indigo-400">•</span>
+                        <span>🚀 Instant Key & Panel Delivery 24/7</span>
+                        <span class="text-indigo-400">•</span>
+                        <span>📞 For any issues or assistance, join Telegram or WhatsApp: 01352508146</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Promo Banner Carousel -->
+            <div class="relative rounded-2xl overflow-hidden border border-indigo-500/30 shadow-2xl group">
+                <div id="bannerTrack" class="flex transition-transform duration-500 ease-out">
+                    <!-- Slide 1: Bengali Panel Store Banner -->
+                    <div class="w-full shrink-0 relative bg-gradient-to-r from-[#0b1026] via-[#1b1145] to-[#2e1065] p-6 sm:p-10 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 min-h-[210px] sm:min-h-[250px]">
+                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_right,#38bdf8,transparent_55%)]"></div>
+                        <div class="relative z-10 max-w-xl space-y-3 text-center md:text-left">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">
+                                <i class="fa-solid fa-fire text-rose-400"></i> 100% ANTI-BAN & SAFE PANELS
+                            </span>
+                            <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight tracking-tight">
+                                প্যানেল কিনবেন? <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400">দ্রুত ও বিশ্বাসের সাথে</span>
+                            </h1>
+                            <p class="text-slate-300 text-xs sm:text-base font-medium">
+                                💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀 — Android Non-Root, Root, iPhone (iOS) এবং PC-এর সকল প্রিমিয়াম প্যানেল এখন অটোমেটিক ডেলিভারিতে!
+                            </p>
+                        </div>
+                        <div class="relative z-10 flex items-center justify-center">
+                            <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-gradient-to-br from-rose-500 via-indigo-600 to-cyan-500 p-1 shadow-2xl shadow-indigo-600/40 rotate-3 group-hover:rotate-0 transition-transform">
+                                <div class="w-full h-full bg-[#090d1e] rounded-[20px] flex flex-col items-center justify-center p-3 text-center">
+                                    <i class="fa-solid fa-skull-crossbones text-3xl sm:text-4xl text-cyan-400 mb-1"></i>
+                                    <span class="text-[11px] sm:text-xs font-black tracking-wider text-white">SHADOW MOD</span>
+                                    <span class="text-[9px] text-emerald-400 font-bold mt-0.5">● SERVER ONLINE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Instant Auto Topup Banner -->
+                    <div class="w-full shrink-0 relative bg-gradient-to-r from-[#06182c] via-[#0d2b4e] to-[#133b6e] p-6 sm:p-10 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 min-h-[210px] sm:min-h-[250px]">
+                        <div class="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_bottom_left,#10b981,transparent_55%)]"></div>
+                        <div class="relative z-10 max-w-xl space-y-3 text-center md:text-left">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                                <i class="fa-solid fa-bolt text-emerald-400"></i> 24/7 INSTANT AUTO DEPOSIT
+                            </span>
+                            <h2 class="text-2xl sm:text-4xl font-black text-white leading-tight">
+                                bKash • Nagad • Rocket • Binance & UPI
+                            </h2>
+                            <p class="text-slate-200 text-xs sm:text-base">
+                                ওয়ালেটে টাকা অ্যাড করুন মাত্র ১০ সেকেন্ডে! বাংলাদেশ, ইন্ডিয়া ও গ্লোবাল পেমেন্ট সাপোর্টেড।
+                            </p>
+                            <div class="pt-1">
+                                <button onclick="navigateTo('add-fund')" class="neon-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-white inline-flex items-center gap-2">
+                                    <i class="fa-solid fa-plus-circle"></i> Add Fund Now
+                                </button>
+                            </div>
+                        </div>
+                        <div class="relative z-10 grid grid-cols-2 gap-2.5 text-center">
+                            <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-xl px-4 py-3">
+                                <div class="text-pink-400 font-black text-sm">bKash</div>
+                                <div class="text-[10px] text-slate-300">Auto Verify</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-xl px-4 py-3">
+                                <div class="text-orange-400 font-black text-sm">Nagad</div>
+                                <div class="text-[10px] text-slate-300">Auto Verify</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-xl px-4 py-3">
+                                <div class="text-amber-400 font-black text-sm">Binance</div>
+                                <div class="text-[10px] text-slate-300">USDT Pay</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-xl px-4 py-3">
+                                <div class="text-cyan-400 font-black text-sm">India UPI</div>
+                                <div class="text-[10px] text-slate-300">Instant INR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Controls -->
+                <button onclick="prevSlide()" aria-label="Previous slide" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15 transition">
+                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                </button>
+                <button onclick="nextSlide()" aria-label="Next slide" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/15 transition">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+                <!-- Dots -->
+                <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2">
+                    <button onclick="goToSlide(0)" id="dot-0" class="w-6 h-1.5 rounded-full bg-white transition-all"></button>
+                    <button onclick="goToSlide(1)" id="dot-1" class="w-2 h-1.5 rounded-full bg-white/40 transition-all"></button>
+                </div>
+            </div>
+
+            <!-- Category Filter Bar -->
+            <div class="space-y-4 pt-1">
+                <div class="flex flex-wrap items-center gap-2 sm:gap-2.5" id="categoryTabs">
+                    <button onclick="filterCategory('ALL')" data-cat="ALL" class="cat-tab active px-4 py-2 rounded-xl text-xs sm:text-sm font-bold tracking-wide transition bg-white text-slate-950 shadow-lg shadow-white/15">
+                        ALL
+                    </button>
+                    <button onclick="filterCategory('NON ROOT')" data-cat="NON ROOT" class="cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold tracking-wide transition bg-[#11192e] text-slate-300 hover:text-white border border-slate-800">
+                        NON ROOT
+                    </button>
+                    <button onclick="filterCategory('ROOT')" data-cat="ROOT" class="cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold tracking-wide transition bg-[#11192e] text-slate-300 hover:text-white border border-slate-800">
+                        ROOT
+                    </button>
+                    <button onclick="filterCategory('IPHONE')" data-cat="IPHONE" class="cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold tracking-wide transition bg-[#11192e] text-slate-300 hover:text-white border border-slate-800">
+                        IPHONE
+                    </button>
+                    <button onclick="filterCategory('PC')" data-cat="PC" class="cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold tracking-wide transition bg-[#11192e] text-slate-300 hover:text-white border border-slate-800">
+                        PC
+                    </button>
+                </div>
+
+                <!-- Section Title & Item Counter -->
+                <div class="flex items-center justify-between">
+                    <h2 id="currentCategoryTitle" class="text-lg sm:text-xl font-extrabold uppercase tracking-wider text-white">
+                        ALL PANELS
+                    </h2>
+                    <span id="itemCountBadge" class="px-3 py-1 rounded-lg bg-[#11192e] border border-slate-800 text-xs font-semibold text-slate-300">
+                        22 Items
+                    </span>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <!-- Populated dynamically via JS -->
+            </div>
+
+            <!-- Latest Orders Section -->
+            <div class="pt-6 space-y-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-white">Latest Orders</h3>
+                    </div>
+                    <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
+                        Live orders
+                    </span>
+                </div>
+                <div id="latestOrdersGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <!-- Top Spenders Leaderboard -->
+            <div class="pt-4 space-y-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-solid fa-trophy text-amber-400 text-lg"></i>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-white">Top Spenders</h3>
+                    </div>
+                    <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold">
+                        Leaderboard
+                    </span>
+                </div>
+                <div id="leaderboardGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== VIEW 2: MY ACCOUNT ==================== -->
+        <section id="view-account" class="hidden space-y-6 max-w-4xl mx-auto">
+            <!-- Profile Header Card -->
+            <div class="glass-card rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-600 to-blue-500 flex items-center justify-center text-2xl font-black text-white shadow-lg">
+                        S
+                    </div>
+                    <div>
+                        <h2 id="accDisplayName" class="text-xl font-extrabold text-white">Shadow Gamer</h2>
+                        <p id="accDisplayEmail" class="text-sm text-slate-400">shadowmod@gmail.com</p>
+                    </div>
+                </div>
+                <button onclick="navigateTo('add-fund')" class="neon-btn px-5 py-2.5 rounded-xl text-sm font-bold text-white flex items-center gap-2 w-full sm:w-auto justify-center">
+                    <i class="fa-solid fa-plus"></i> Add Fund
+                </button>
+            </div>
+
+            <!-- 3 Stat Boxes -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">BALANCE</div>
+                    <div id="accBalanceStat" class="text-2xl font-black text-emerald-400">৳0</div>
+                </div>
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">TOTAL ORDER</div>
+                    <div id="accOrderStat" class="text-2xl font-black text-white">0</div>
+                </div>
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">TOTAL SPENT</div>
+                    <div id="accSpentStat" class="text-2xl font-black text-indigo-400">৳0</div>
+                </div>
+            </div>
+
+            <!-- Personal Information Form -->
+            <div class="glass-card rounded-2xl p-6 space-y-4">
+                <h3 class="text-base font-bold text-white border-b border-slate-800 pb-3">Personal Information</h3>
+                <form onsubmit="handleUpdateProfile(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1.5">Full Name</label>
+                        <input type="text" id="inputFullName" value="Shadow Gamer" class="w-full bg-[#090e1c] border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1.5">Email</label>
+                        <input type="email" id="inputEmail" value="shadowmod@gmail.com" class="w-full bg-[#090e1c] border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1.5">Phone Number</label>
+                        <input type="tel" id="inputPhone" value="01853818741" placeholder="01XXXXXXXXX" class="w-full bg-[#090e1c] border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <button type="submit" class="neon-btn px-6 py-2.5 rounded-xl text-sm font-bold text-white">
+                        Update
+                    </button>
+                </form>
+            </div>
+
+            <!-- Change Password Form -->
+            <div class="glass-card rounded-2xl p-6 space-y-4">
+                <h3 class="text-base font-bold text-white border-b border-slate-800 pb-3">Change Password</h3>
+                <form onsubmit="handleChangePassword(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1.5">Current password</label>
+                        <input type="password" required placeholder="••••••••" class="w-full bg-[#090e1c] border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1.5">New password</label>
+                        <input type="password" id="newPassInput" required placeholder="••••••••" class="w-full bg-[#090e1c] border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1.5">Confirm new password</label>
+                        <input type="password" id="confirmPassInput" required placeholder="••••••••" class="w-full bg-[#090e1c] border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <button type="submit" class="neon-btn px-6 py-2.5 rounded-xl text-sm font-bold text-white">
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ==================== VIEW 3: MY ORDERS ==================== -->
+        <section id="view-orders" class="hidden space-y-5 max-w-5xl mx-auto">
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-extrabold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-bag-shopping text-indigo-400"></i> My Orders
+                </h2>
+                <button onclick="navigateTo('home')" class="text-xs font-bold text-indigo-400 hover:text-indigo-300">+ Buy More Panels</button>
+            </div>
+            <div id="userOrdersList" class="space-y-3">
+                <!-- Populated dynamically -->
+            </div>
+        </section>
+
+        <!-- ==================== VIEW 4: MY CODES ==================== -->
+        <section id="view-codes" class="hidden space-y-5 max-w-5xl mx-auto">
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-extrabold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-key text-amber-400"></i> My Activation Codes
+                </h2>
+                <span class="text-xs text-slate-400">Click copy to use in panel loader</span>
+            </div>
+            <div id="userCodesList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Populated dynamically -->
+            </div>
+        </section>
+
+        <!-- ==================== VIEW 5: MY TRANSACTIONS ==================== -->
+        <section id="view-transactions" class="hidden space-y-5 max-w-5xl mx-auto">
+            <h2 class="text-xl font-extrabold text-white flex items-center gap-2">
+                <i class="fa-solid fa-receipt text-cyan-400"></i> My Transactions
+            </h2>
+            <div id="userTransactionsList" class="space-y-3">
+                <!-- Populated dynamically -->
+            </div>
+        </section>
+
+        <!-- ==================== VIEW 6: ADD FUND ==================== -->
+        <section id="view-add-fund" class="hidden space-y-6 max-w-3xl mx-auto">
+            <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+                <div class="border-b border-slate-800 pb-4 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-extrabold text-white">Add Money</h2>
+                        <p class="text-xs text-slate-400 mt-0.5">Select Payment Method & Enter Deposit Amount</p>
+                    </div>
+                    <span class="px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
+                        Current: <span id="addFundCurrentBal">৳0</span>
+                    </span>
+                </div>
+
+                <!-- Payment Method Selector Cards -->
+                <div class="space-y-2.5">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">Select Payment Method</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5" id="paymentMethodGrid">
+                        <!-- Bangladesh Pay -->
+                        <button type="button" onclick="selectPaymentGateway('Bangladesh Pay')" data-gw="Bangladesh Pay" class="gw-card active text-left p-4 rounded-xl bg-[#131d36] border-2 border-indigo-500 transition relative">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-black">BD PAY</span>
+                                <i class="fa-solid fa-circle-check text-indigo-400 gw-check"></i>
+                            </div>
+                            <div class="font-bold text-white text-sm">Bangladesh Pay</div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">Min: 10 / Max: 300000</div>
+                        </button>
+
+                        <!-- Binance Pay -->
+                        <button type="button" onclick="selectPaymentGateway('Binance Pay')" data-gw="Binance Pay" class="gw-card text-left p-4 rounded-xl bg-[#0d1426] border-2 border-slate-800 hover:border-slate-700 transition relative">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 text-[10px] font-black">CRYPTO</span>
+                                <i class="fa-solid fa-circle-check text-indigo-400 gw-check hidden"></i>
+                            </div>
+                            <div class="font-bold text-white text-sm">Binance Pay</div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">Min: 10 / Max: 200000</div>
+                        </button>
+
+                        <!-- IndiaPay UPI -->
+                        <button type="button" onclick="selectPaymentGateway('IndiaPay UPI')" data-gw="IndiaPay UPI" class="gw-card text-left p-4 rounded-xl bg-[#0d1426] border-2 border-slate-800 hover:border-slate-700 transition relative">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-400 text-[10px] font-black">UPI AUTO</span>
+                                <i class="fa-solid fa-circle-check text-indigo-400 gw-check hidden"></i>
+                            </div>
+                            <div class="font-bold text-white text-sm">IndiaPay UPI</div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">Min: 10 / Max: 100000</div>
+                            <div class="text-[10px] text-cyan-400 font-semibold mt-0.5">1 INR = 1.3 BDT</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Amount Input & Quick Pills -->
+                <div class="space-y-3">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">Enter the amount (BDT ৳)</label>
+                    <input type="number" id="depositAmountInput" min="10" max="300000" placeholder="Amount (e.g. 120)" class="w-full bg-[#090e1c] border border-slate-700 rounded-xl px-4 py-3 text-base font-bold text-white focus:outline-none focus:border-indigo-500">
+
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" onclick="setDepositAmount(10)" class="px-3.5 py-1.5 rounded-lg bg-[#131d36] hover:bg-indigo-600/30 border border-slate-700 text-xs font-bold text-slate-200 transition">৳10</button>
+                        <button type="button" onclick="setDepositAmount(50)" class="px-3.5 py-1.5 rounded-lg bg-[#131d36] hover:bg-indigo-600/30 border border-slate-700 text-xs font-bold text-slate-200 transition">৳50</button>
+                        <button type="button" onclick="setDepositAmount(100)" class="px-3.5 py-1.5 rounded-lg bg-[#131d36] hover:bg-indigo-600/30 border border-slate-700 text-xs font-bold text-slate-200 transition">৳100</button>
+                        <button type="button" onclick="setDepositAmount(500)" class="px-3.5 py-1.5 rounded-lg bg-[#131d36] hover:bg-indigo-600/30 border border-slate-700 text-xs font-bold text-slate-200 transition">৳500</button>
+                        <button type="button" onclick="setDepositAmount(1000)" class="px-3.5 py-1.5 rounded-lg bg-[#131d36] hover:bg-indigo-600/30 border border-slate-700 text-xs font-bold text-slate-200 transition">৳1000</button>
+                        <button type="button" onclick="setDepositAmount(2000)" class="px-3.5 py-1.5 rounded-lg bg-[#131d36] hover:bg-indigo-600/30 border border-slate-700 text-xs font-bold text-slate-200 transition">৳2000</button>
+                        <button type="button" onclick="setDepositAmount(5000)" class="px-3.5 py-1.5 rounded-lg bg-[#131d36] hover:bg-indigo-600/30 border border-slate-700 text-xs font-bold text-slate-200 transition">৳5000</button>
+                    </div>
+                </div>
+
+                <!-- Crimson Submit CTA -->
+                <button type="button" onclick="openSecureCheckout()" class="w-full crimson-btn py-3.5 rounded-xl text-sm sm:text-base font-extrabold text-white tracking-wide shadow-lg">
+                    Click Here To Add Money
+                </button>
+            </div>
+
+            <!-- My Deposits History -->
+            <div class="glass-card rounded-2xl p-6 space-y-4">
+                <h3 class="text-base font-extrabold text-white">My Deposits</h3>
+                <div id="depositsHistoryList" class="space-y-2.5">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== VIEW 7: CONTACT US ==================== -->
+        <section id="view-contact" class="hidden space-y-6 max-w-4xl mx-auto">
+            <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-5">
+                <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-600/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400">
+                        <i class="fa-solid fa-headset text-lg"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-extrabold text-white">Contact Us</h2>
+                        <p class="text-xs text-slate-400">💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀 Official Support Desk</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3 text-sm text-slate-300 leading-relaxed">
+                    <h3 class="text-base font-bold text-white">Start a Conversation</h3>
+                    <p>
+                        <strong class="text-indigo-400">24/7 Telegram Support:</strong>
+                        <a href="https://t.me/+pVT4TRGct9k0NzQ1" target="_blank" class="text-cyan-400 underline hover:text-cyan-300 ml-1">https://t.me/+pVT4TRGct9k0NzQ1</a>
+                    </p>
+                    <p><strong class="text-emerald-400">WhatsApp Helpline:</strong> <a href="https://wa.me/8801352508146" target="_blank" class="text-emerald-300 underline hover:text-emerald-200">+880 1352-508146 (01352508146)</a> (9:00 AM – 10:00 PM)</p>
+                    <p class="text-slate-400 text-xs">
+                        No time to wait around? We usually respond within a few minutes. Stay with <span class="text-white font-semibold">💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀</span> for the best gaming panels & instant digital delivery.
+                    </p>
+                </div>
+
+                <!-- Quick Support Ticket Form -->
+                <form onsubmit="handleContactSubmit(event)" class="pt-3 border-t border-slate-800 space-y-3.5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        <input type="text" required placeholder="Your Name / UID" class="bg-[#090e1c] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                        <input type="text" required placeholder="Telegram @username or Phone" class="bg-[#090e1c] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <textarea rows="3" required placeholder="Describe your issue or panel query..." class="w-full bg-[#090e1c] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"></textarea>
+                    <button type="submit" class="neon-btn px-6 py-2.5 rounded-xl text-sm font-bold text-white">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ==================== VIEW 8: ADMIN CONTROL PANEL ==================== -->
+        <section id="view-admin" class="hidden space-y-6">
+            <!-- Admin Top Header Banner -->
+            <div class="glass-card rounded-2xl p-6 border-rose-500/40 bg-gradient-to-r from-[#170c24] via-[#131530] to-[#0d172e] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 text-2xl">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-xl sm:text-2xl font-black text-white">শ্যাডো মোড অ্যাডমিন প্যানেল</h2>
+                            <span class="px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-[10px] font-extrabold uppercase">ADMIN ACCESS</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-0.5">Full Control: Panels, Prices, Customer Orders, Deposits & Site Settings</p>
+                    </div>
+                </div>
+                <button onclick="navigateTo('home')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-store"></i> Back to Store
+                </button>
+            </div>
+
+            <!-- Admin Quick Stats -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="glass-card rounded-2xl p-4">
+                    <div class="text-[11px] font-bold uppercase text-slate-400">Total Panels</div>
+                    <div id="adminStatPanels" class="text-2xl font-black text-cyan-400 mt-1">0</div>
+                </div>
+                <div class="glass-card rounded-2xl p-4">
+                    <div class="text-[11px] font-bold uppercase text-slate-400">Total Orders</div>
+                    <div id="adminStatOrders" class="text-2xl font-black text-indigo-400 mt-1">0</div>
+                </div>
+                <div class="glass-card rounded-2xl p-4">
+                    <div class="text-[11px] font-bold uppercase text-slate-400">Pending Deposits</div>
+                    <div id="adminStatDeposits" class="text-2xl font-black text-amber-400 mt-1">0</div>
+                </div>
+                <div class="glass-card rounded-2xl p-4">
+                    <div class="text-[11px] font-bold uppercase text-slate-400">Registered Users</div>
+                    <div id="adminStatUsers" class="text-2xl font-black text-emerald-400 mt-1">0</div>
+                </div>
+            </div>
+
+            <!-- Admin Navigation Tabs -->
+            <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-3">
+                <button onclick="switchAdminTab('panels')" data-admintab="panels" class="admin-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white">
+                    <i class="fa-solid fa-layer-group mr-1.5"></i> Manage Panels
+                </button>
+                <button onclick="switchAdminTab('orders')" data-admintab="orders" class="admin-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#11192e] text-slate-300 hover:text-white border border-slate-800">
+                    <i class="fa-solid fa-cart-shopping mr-1.5"></i> Customer Orders
+                </button>
+                <button onclick="switchAdminTab('deposits')" data-admintab="deposits" class="admin-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#11192e] text-slate-300 hover:text-white border border-slate-800">
+                    <i class="fa-solid fa-money-bill-transfer mr-1.5"></i> Deposit Requests
+                </button>
+                <button onclick="switchAdminTab('settings')" data-admintab="settings" class="admin-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#11192e] text-slate-300 hover:text-white border border-slate-800">
+                    <i class="fa-solid fa-sliders mr-1.5"></i> Site Settings
+                </button>
+            </div>
+
+            <!-- ADMIN TAB 1: MANAGE PANELS -->
+            <div id="admin-tab-panels" class="space-y-6">
+                <!-- Add / Edit Panel Form -->
+                <div class="glass-card rounded-2xl p-6 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <h3 id="adminPanelFormTitle" class="text-base font-extrabold text-white">+ Add New Panel / Product</h3>
+                        <button type="button" id="cancelEditPanelBtn" onclick="resetAdminPanelForm()" class="hidden text-xs font-bold text-rose-400 hover:underline">Cancel Edit</button>
+                    </div>
+                    <form onsubmit="handleAdminSavePanel(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <input type="hidden" id="editPanelId">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Panel Name *</label>
+                            <input type="text" id="adminPName" required placeholder="e.g. SHADOW VIP HEADSHOT" class="w-full bg-[#090e1c] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Category *</label>
+                            <select id="adminPCat" class="w-full bg-[#090e1c] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                                <option value="NON ROOT">NON ROOT</option>
+                                <option value="ROOT">ROOT</option>
+                                <option value="IPHONE">IPHONE</option>
+                                <option value="PC">PC</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Base Price (৳) *</label>
+                            <input type="number" id="adminPPrice" required min="1" placeholder="e.g. 150" class="w-full bg-[#090e1c] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Status *</label>
+                            <select id="adminPStatus" class="w-full bg-[#090e1c] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                                <option value="ONLINE">ONLINE</option>
+                                <option value="MAINTENANCE">MAINTENANCE</option>
+                                <option value="OFFLINE">OFFLINE</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Badge / Tag</label>
+                            <input type="text" id="adminPBadge" placeholder="e.g. SAFE • NO BAN" class="w-full bg-[#090e1c] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Custom Image URL (Optional)</label>
+                            <input type="url" id="adminPImage" placeholder="https://..." class="w-full bg-[#090e1c] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="sm:col-span-2 lg:col-span-3">
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Panel Features / Description</label>
+                            <input type="text" id="adminPDesc" placeholder="e.g. Aimbot, ESP Line, High Damage, 100% Main ID Safe" class="w-full bg-[#090e1c] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="sm:col-span-2 lg:col-span-3 flex justify-end">
+                            <button type="submit" id="adminSavePanelBtn" class="neon-btn px-6 py-2.5 rounded-xl text-sm font-extrabold text-white">
+                                <i class="fa-solid fa-plus mr-1.5"></i> Save Panel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Existing Panels Table -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 overflow-x-auto">
+                    <h3 class="text-base font-extrabold text-white">All Store Panels (Instant Edit / Status Toggle / Delete)</h3>
+                    <table class="w-full text-left border-collapse min-w-[680px]">
+                        <thead>
+                            <tr class="border-b border-slate-800 text-xs uppercase text-slate-400">
+                                <th class="py-3 px-2">Panel Name</th>
+                                <th class="py-3 px-2">Category</th>
+                                <th class="py-3 px-2">Price</th>
+                                <th class="py-3 px-2">Live Status</th>
+                                <th class="py-3 px-2 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminPanelsTableBody" class="divide-y divide-slate-800/70 text-sm">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ADMIN TAB 2: MANAGE CUSTOMER ORDERS -->
+            <div id="admin-tab-orders" class="hidden space-y-4">
+                <div class="glass-card rounded-2xl p-6 space-y-4">
+                    <h3 class="text-base font-extrabold text-white">Customer Orders & License Key Assignment</h3>
+                    <div id="adminOrdersContainer" class="space-y-3">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADMIN TAB 3: MANAGE DEPOSIT REQUESTS -->
+            <div id="admin-tab-deposits" class="hidden space-y-4">
+                <div class="glass-card rounded-2xl p-6 space-y-4">
+                    <h3 class="text-base font-extrabold text-white">Add Fund / Deposit Requests</h3>
+                    <div id="adminDepositsContainer" class="space-y-3">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADMIN TAB 4: SITE SETTINGS -->
+            <div id="admin-tab-settings" class="hidden space-y-4">
+                <div class="glass-card rounded-2xl p-6 space-y-4 max-w-2xl">
+                    <h3 class="text-base font-extrabold text-white border-b border-slate-800 pb-3">Store Contact & Payment Configuration</h3>
+                    <form onsubmit="handleAdminSaveSettings(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Announcement Ticker Text</label>
+                            <input type="text" id="setAnnouncement" class="w-full bg-[#090e1c] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 mb-1">Telegram Group / Support URL</label>
+                                <input type="url" id="setTelegramUrl" class="w-full bg-[#090e1c] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 mb-1">WhatsApp Support Number</label>
+                                <input type="text" id="setWhatsappNum" class="w-full bg-[#090e1c] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 mb-1">bKash Payment Number</label>
+                                <input type="text" id="setBkashNum" class="w-full bg-[#090e1c] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 mb-1">Nagad Payment Number</label>
+                                <input type="text" id="setNagadNum" class="w-full bg-[#090e1c] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                            </div>
+                        </div>
+                        <button type="submit" class="neon-btn px-6 py-2.5 rounded-xl text-sm font-extrabold text-white">
+                            Save Site Settings
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================
+         SHARED FOOTER
+    =========================================== -->
+    <footer class="relative z-10 mt-14 border-t border-slate-800/80 bg-[#070b17]/95 pt-10 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <!-- Top 2 Cards: Stay Connected & Support Center -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Stay Connected -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <span class="text-[11px] font-bold uppercase tracking-widest text-indigo-400">💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀 COMMUNITY</span>
+                        <h4 class="text-lg font-extrabold text-white">STAY CONNECTED</h4>
+                        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                            যেকোনো সমস্যা বা সহায়তার প্রয়োজনে আমাদের অফিসিয়াল টেলিগ্রাম ও সোশ্যাল মিডিয়া চ্যানেলে যুক্ত থাকুন। নতুন আপডেট ও ডিসকাউন্ট অফার সবার আগে পেতে 💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀-এর সাথেই থাকুন।
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-1">
+                        <a id="footerTelegramLink" href="https://t.me/+pVT4TRGct9k0NzQ1" target="_blank" class="w-9 h-9 rounded-xl bg-slate-800/90 hover:bg-sky-600 text-slate-300 hover:text-white flex items-center justify-center transition">
+                            <i class="fa-brands fa-telegram"></i>
+                        </a>
+                        <a href="#facebook" onclick="showToast('Opening Shadow Mod Facebook Page...', 'info')" class="w-9 h-9 rounded-xl bg-slate-800/90 hover:bg-blue-600 text-slate-300 hover:text-white flex items-center justify-center transition">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#youtube" onclick="showToast('Opening Shadow Mod YouTube Channel...', 'info')" class="w-9 h-9 rounded-xl bg-slate-800/90 hover:bg-red-600 text-slate-300 hover:text-white flex items-center justify-center transition">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                        <a href="#discord" onclick="showToast('Opening Shadow Mod Discord Server...', 'info')" class="w-9 h-9 rounded-xl bg-slate-800/90 hover:bg-indigo-600 text-slate-300 hover:text-white flex items-center justify-center transition">
+                            <i class="fa-brands fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Support Center -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between space-y-4">
+                    <div class="space-y-1">
+                        <span class="text-[11px] font-bold uppercase tracking-widest text-emerald-400">WE ARE HERE TO HELP</span>
+                        <h4 class="text-lg font-extrabold text-white">SUPPORT CENTER</h4>
+                    </div>
+                    <a id="footerWhatsappLink" href="https://wa.me/8801352508146" target="_blank" class="flex items-center gap-4 p-4 rounded-xl bg-[#0b1326] hover:bg-[#101c38] border border-emerald-500/30 transition group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-2xl group-hover:scale-105 transition-transform">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <div class="text-[11px] font-semibold text-slate-400">WhatsApp Support • 9AM - 10PM</div>
+                            <div id="footerWhatsappText" class="text-base sm:text-lg font-extrabold text-white">+8801352508146</div>
+                            <div class="text-xs text-emerald-400 font-medium">Chat with our support team →</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- About Platform Card -->
+            <div class="glass-card rounded-2xl p-6 space-y-4">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-skull text-indigo-400 text-lg"></i>
+                    <h4 class="text-base sm:text-lg font-extrabold text-white">💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀 — Gaming Panel & Digital Service Platform</h4>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                    💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀 is a Bangladesh-focused online platform for browsing gaming panels and digital services in one convenient place. Explore available Android Non-Root, Root, iOS, and PC products, check each product's live server status and availability, and enjoy instant automated delivery after checkout.
+                </p>
+                <div class="flex flex-wrap gap-2 pt-1">
+                    <span class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-semibold text-slate-300">Android Non-Root</span>
+                    <span class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-semibold text-slate-300">Root</span>
+                    <span class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-semibold text-slate-300">iOS</span>
+                    <span class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-semibold text-slate-300">PC</span>
+                    <span class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-semibold text-slate-300">Product Codes</span>
+                    <span class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-semibold text-slate-300">Customer Support</span>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright Bar -->
+            <div class="border-t border-slate-800/80 pt-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+                <div class="font-bold text-slate-300">💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀</div>
+                <div>© 2026 💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀. All rights reserved.</div>
+                <div>Browse responsibly • Read product details before purchase</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         FLOATING BOTTOM-RIGHT WHATSAPP HELP PILL
+    =========================================== -->
+    <a id="floatingWhatsappPill" href="https://wa.me/8801352508146" target="_blank" class="fixed bottom-5 right-5 z-40 flex items-center gap-2.5 bg-[#0f172a] hover:bg-[#16223d] border border-emerald-500/40 pl-3.5 pr-2 py-2 rounded-full shadow-2xl shadow-black/60 group transition">
+        <span class="text-xs font-bold text-white">সাহায্য লাগবে?</span>
+        <span class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-base shadow-md group-hover:scale-110 transition-transform">
+            <i class="fa-brands fa-whatsapp"></i>
+        </span>
+    </a>
+
+    <!-- ==========================================
+         UNIFIED LOGIN / REGISTER MODAL (ADMIN + USER)
+    =========================================== -->
+    <div id="authModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="w-full max-w-md rounded-3xl bg-[#0b1224] border border-indigo-500/40 p-6 sm:p-7 space-y-5 shadow-2xl relative">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center space-y-1">
+                <div class="mx-auto w-12 h-12 rounded-2xl bg-indigo-600/20 border border-indigo-500/40 flex items-center justify-center text-cyan-400 text-2xl mb-2">
+                    <i class="fa-solid fa-skull"></i>
+                </div>
+                <h3 class="text-xl font-black text-white">💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀</h3>
+                <p class="text-xs text-slate-400">User & Admin Unified Portal</p>
+            </div>
+
+            <!-- Login / Register Switch Tabs -->
+            <div class="grid grid-cols-2 gap-2 bg-[#070b17] p-1.5 rounded-xl border border-slate-800">
+                <button type="button" id="authTabLogin" onclick="switchAuthTab('login')" class="py-2 rounded-lg text-xs font-extrabold bg-indigo-600 text-white transition">
+                    Login
+                </button>
+                <button type="button" id="authTabRegister" onclick="switchAuthTab('register')" class="py-2 rounded-lg text-xs font-extrabold text-slate-400 hover:text-white transition">
+                    Create Account
+                </button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm" onsubmit="handleUnifiedLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Email or Username</label>
+                    <input type="text" id="loginIdentifier" required placeholder="admin@shadowmod.com or user@shadowmod.com" class="w-full bg-[#070b17] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Password</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full bg-[#070b17] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                </div>
+                <button type="submit" class="w-full neon-btn py-3 rounded-xl text-sm font-extrabold text-white">
+                    Login Now
+                </button>
+
+                <!-- Quick Demo Fill Pills -->
+                <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between gap-2 text-[11px]">
+                    <button type="button" onclick="fillDemoLogin('user')" class="flex-1 py-1.5 px-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 font-semibold">
+                        Demo User Fill
+                    </button>
+                    <button type="button" onclick="fillDemoLogin('admin')" class="flex-1 py-1.5 px-2 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/30 text-rose-300 font-semibold">
+                        Admin Login Fill
+                    </button>
+                </div>
+            </form>
+
+            <!-- REGISTER FORM -->
+            <form id="registerForm" onsubmit="handleUserRegister(event)" class="hidden space-y-3.5">
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Full Name</label>
+                    <input type="text" id="regName" required placeholder="Your Gaming Name" class="w-full bg-[#070b17] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Email Address</label>
+                    <input type="email" id="regEmail" required placeholder="you@gmail.com" class="w-full bg-[#070b17] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Phone Number</label>
+                    <input type="tel" id="regPhone" required placeholder="01XXXXXXXXX" class="w-full bg-[#070b17] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Create Password</label>
+                    <input type="password" id="regPassword" required placeholder="••••••••" class="w-full bg-[#070b17] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                </div>
+                <button type="submit" class="w-full neon-btn py-3 rounded-xl text-sm font-extrabold text-white">
+                    Create Account & Login
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         WELCOME TELEGRAM COMMUNITY MODAL
+    =========================================== -->
+    <div id="telegramModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm transition-opacity duration-300">
+        <div class="w-full max-w-md rounded-3xl bg-[#0b1224] border border-indigo-500/40 p-6 sm:p-7 text-center shadow-2xl shadow-indigo-950/60 relative animate-[fadeIn_0.25s_ease-out]">
+            <!-- Close X -->
+            <button onclick="closeTelegramModal()" aria-label="Close modal" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+
+            <!-- Telegram Icon Circle -->
+            <div class="mx-auto w-16 h-16 rounded-full bg-sky-500/15 border border-sky-500/35 flex items-center justify-center mb-4 shadow-lg shadow-sky-500/20">
+                <i class="fa-brands fa-telegram text-3xl text-sky-400"></i>
+            </div>
+
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 text-[10px] font-extrabold tracking-widest uppercase mb-3">
+                <i class="fa-solid fa-paper-plane"></i> OFFICIAL TELEGRAM COMMUNITY
+            </div>
+
+            <h2 class="text-xl sm:text-2xl font-black text-white mb-2">
+                Join Our Official Telegram Community
+            </h2>
+
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-5">
+                Stay connected with <span class="text-white font-bold">💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀</span>! Get all the latest notices, important updates, announcements, and dedicated customer support directly through our official Telegram group.
+            </p>
+
+            <!-- 4 Feature Pills -->
+            <div class="grid grid-cols-2 gap-2.5 text-left mb-6">
+                <div class="flex items-center gap-2 bg-[#121c36] border border-slate-800 rounded-xl px-3 py-2 text-xs font-semibold text-slate-200">
+                    <i class="fa-solid fa-circle-check text-sky-400"></i> Important Notices
+                </div>
+                <div class="flex items-center gap-2 bg-[#121c36] border border-slate-800 rounded-xl px-3 py-2 text-xs font-semibold text-slate-200">
+                    <i class="fa-solid fa-circle-check text-sky-400"></i> Latest Updates
+                </div>
+                <div class="flex items-center gap-2 bg-[#121c36] border border-slate-800 rounded-xl px-3 py-2 text-xs font-semibold text-slate-200">
+                    <i class="fa-solid fa-circle-check text-sky-400"></i> Announcements
+                </div>
+                <div class="flex items-center gap-2 bg-[#121c36] border border-slate-800 rounded-xl px-3 py-2 text-xs font-semibold text-slate-200">
+                    <i class="fa-solid fa-circle-check text-sky-400"></i> Customer Support
+                </div>
+            </div>
+
+            <a id="modalTelegramJoinBtn" href="https://t.me/+pVT4TRGct9k0NzQ1" target="_blank" onclick="closeTelegramModal()" class="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-sky-600/30 transition">
+                <i class="fa-brands fa-telegram text-base"></i> Join Official Telegram Group
+            </a>
+
+            <p class="text-[11px] text-slate-500 mt-3">
+                Stay informed. Stay connected with 💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀
+            </p>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         RIGHT-SIDE USER DRAWER MENU
+    =========================================== -->
+    <div id="userDrawerOverlay" onclick="toggleUserDrawer(false)" class="fixed inset-0 z-50 bg-black/65 backdrop-blur-xs hidden transition-opacity"></div>
+    <aside id="userDrawer" class="fixed top-0 right-0 z-50 h-full w-72 sm:w-80 bg-[#0a1020] border-l border-slate-800 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col justify-between p-5">
+        <div class="space-y-5">
+            <!-- User Info Header -->
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <div class="flex items-center gap-3">
+                    <div id="drawerAvatarBadge" class="w-11 h-11 rounded-full bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center font-black text-white text-base">
+                        S
+                    </div>
+                    <div class="overflow-hidden">
+                        <div class="flex items-center gap-1.5">
+                            <div id="drawerUserName" class="text-sm font-extrabold text-white truncate">Shadow Gamer</div>
+                            <span id="drawerRoleBadge" class="hidden px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-400 text-[9px] font-black">ADMIN</span>
+                        </div>
+                        <div id="drawerUserEmail" class="text-xs text-slate-400 truncate">user@shadowmod.com</div>
+                    </div>
+                </div>
+                <button onclick="toggleUserDrawer(false)" class="w-8 h-8 rounded-lg bg-slate-800/80 text-slate-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Logout Pill -->
+            <button onclick="handleLogout()" class="w-full py-2 px-3 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 text-xs font-bold flex items-center justify-center gap-2 transition">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+
+            <!-- Drawer Navigation Links -->
+            <nav class="space-y-1.5">
+                <!-- Admin Panel Link in Drawer (Shown ONLY to Admin) -->
+                <button id="drawerAdminLink" onclick="navigateTo('admin')" class="hidden w-full items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-extrabold text-rose-300 bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/30 transition">
+                    <i class="fa-solid fa-crown w-4 text-amber-400"></i> শ্যাডো মোড অ্যাডমিন প্যানেল
+                </button>
+
+                <button onclick="navigateTo('account')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-[#131d36] transition">
+                    <i class="fa-regular fa-user w-4 text-indigo-400"></i> My Account
+                </button>
+                <button onclick="navigateTo('orders')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-[#131d36] transition">
+                    <i class="fa-solid fa-bag-shopping w-4 text-emerald-400"></i> My Orders
+                </button>
+                <button onclick="navigateTo('codes')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-[#131d36] transition">
+                    <i class="fa-solid fa-key w-4 text-amber-400"></i> My Codes
+                </button>
+                <button onclick="navigateTo('transactions')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-[#131d36] transition">
+                    <i class="fa-solid fa-clock-rotate-left w-4 text-cyan-400"></i> My Transactions
+                </button>
+                <button onclick="navigateTo('add-fund')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-[#131d36] transition">
+                    <i class="fa-solid fa-wallet w-4 text-pink-400"></i> Add Fund
+                </button>
+                <button onclick="navigateTo('contact')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-[#131d36] transition">
+                    <i class="fa-regular fa-envelope w-4 text-purple-400"></i> Contact Us
+                </button>
+            </nav>
+        </div>
+
+        <!-- Bottom Support Button -->
+        <button onclick="navigateTo('contact')" class="w-full neon-btn py-3 rounded-xl text-sm font-bold text-white flex items-center justify-center gap-2">
+            <i class="fa-solid fa-headset"></i> Support
+        </button>
+    </aside>
+
+    <!-- ==========================================
+         PRODUCT ORDER MODAL
+    =========================================== -->
+    <div id="orderModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="w-full max-w-md rounded-3xl bg-[#0c1326] border border-indigo-500/40 p-6 space-y-5 shadow-2xl relative">
+            <button onclick="closeOrderModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div>
+                <span id="orderModalCategory" class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 text-[10px] font-extrabold uppercase">NON ROOT</span>
+                <h3 id="orderModalTitle" class="text-xl font-black text-white mt-1.5">DRIP WIRE EXTERNAL - SAFE</h3>
+                <p id="orderModalDesc" class="text-xs text-slate-400 mt-0.5">Instant Automated Key & Download Link Delivery</p>
+            </div>
+
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 text-[10px] font-extrabold tracking-widest uppercase mb-3">
+                <i class="fa-solid fa-paper-plane"></i> OFFICIAL TELEGRAM COMMUNITY
+            </div>
+
+            <h2 class="text-xl sm:text-2xl font-black text-white mb-2">
+                Join Our Official Telegram Community
+            </h2>
+
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-5">
+                Stay connected with <span class="text-white font-bold">💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀</span>! Get all the latest notices, important updates, announcements, and dedicated customer support directly through our official Telegram group.
+            </p>
+
+            <!-- 4 Feature Pills -->
+            <div class="grid grid-cols-2 gap-2.5 text-left mb-6">
+                <div class="flex items-center gap-2 bg-[#121c36] border border-slate-800 rounded-xl px-3 py-2 text-xs font-semibold text-slate-200">
+                    <i class="fa-solid fa-circle-check text-sky-400"></i> Important Notices
+                </div>
+                <div class="flex items-center gap-2 bg-[#121c36] border border-slate-800 rounded-xl px-3 py-2 text-xs font-semibold text-slate-200">
+                    <i class="fa-solid fa-circle-check text-sky-400"></i> Latest Updates
+                </div>
+                <div class="flex items-center gap-2 bg-[#121c36] border border-slate-800 rounded-xl px-3 py-2 text-xs font-semibold text-slate-200">
+                    <i class="fa-solid fa-circle-check text-sky-400"></i> Announcements
+                </div>
+                <div class="flex items-center gap-2 bg-[#121c36] border border-slate-800 rounded-xl px-3 py-2 text-xs font-semibold text-slate-200">
+                    <i class="fa-solid fa-circle-check text-sky-400"></i> Customer Support
+                </div>
+            </div>
+
+            <a href="https://t.me/" target="_blank" onclick="closeTelegramModal()" class="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-sky-600/30 transition">
+                <i class="fa-brands fa-telegram text-base"></i> Join Official Telegram Group
+            </a>
+
+            <p class="text-[11px] text-slate-500 mt-3">
+                Stay informed. Stay connected with 💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀
+            </p>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         RIGHT-SIDE USER DRAWER MENU
+    =========================================== -->
+    <div id="userDrawerOverlay" onclick="toggleUserDrawer(false)" class="fixed inset-0 z-50 bg-black/65 backdrop-blur-xs hidden transition-opacity"></div>
+    <aside id="userDrawer" class="fixed top-0 right-0 z-50 h-full w-72 sm:w-80 bg-[#0a1020] border-l border-slate-800 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col justify-between p-5">
+        <div class="space-y-5">
+            <!-- User Info Header -->
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center font-black text-white text-base">
+                        S
+                    </div>
+                    <div class="overflow-hidden">
+                        <div id="drawerUserName" class="text-sm font-extrabold text-white truncate">Shadow Gamer</div>
+                        <div id="drawerUserEmail" class="text-xs text-slate-400 truncate">shadowmod@gmail.com</div>
+                    </div>
+                </div>
+                <button onclick="toggleUserDrawer(false)" class="w-8 h-8 rounded-lg bg-slate-800/80 text-slate-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Logout Pill -->
+            <button onclick="showToast('Session locked! Logged in as Demo User.', 'info'); toggleUserDrawer(false)" class="w-full py-2 px-3 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 text-xs font-bold flex items-center justify-center gap-2 transition">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+
+            <!-- Drawer Navigation Links -->
+            <nav class="space-y-1.5">
+                <button onclick="navigateTo('account')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-[#131d36] transition">
+                    <i class="fa-regular fa-user w-4 text-indigo-400"></i> My Account
+                </button>
+                <button onclick="navigateTo('orders')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-[#131d36] transition">
+                    <i class="fa-solid fa-bag-shopping w-4 text-emerald-400"></i> My Orders
+                </button>
+                <button onclick="navigateTo('codes')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-[#131d36] transition">
+                    <i class="fa-solid fa-key w-4 text-amber-400"></i> My Codes
+                </button>
+                <button onclick="navigateTo('transactions')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-[#131d36] transition">
+                    <i class="fa-solid fa-clock-rotate-left w-4 text-cyan-400"></i> My Transactions
+                </button>
+                <button onclick="navigateTo('add-fund')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-[#131d36] transition">
+                    <i class="fa-solid fa-wallet w-4 text-pink-400"></i> Add Fund
+                </button>
+                <button onclick="navigateTo('contact')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-[#131d36] transition">
+                    <i class="fa-regular fa-envelope w-4 text-purple-400"></i> Contact Us
+                </button>
+            </nav>
+        </div>
+
+        <!-- Bottom Support Button -->
+        <button onclick="navigateTo('contact')" class="w-full neon-btn py-3 rounded-xl text-sm font-bold text-white flex items-center justify-center gap-2">
+            <i class="fa-solid fa-headset"></i> Support
+        </button>
+    </aside>
+
+    <!-- ==========================================
+         PRODUCT ORDER MODAL
+    =========================================== -->
+    <div id="orderModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="w-full max-w-md rounded-3xl bg-[#0c1326] border border-indigo-500/40 p-6 space-y-5 shadow-2xl relative">
+            <button onclick="closeOrderModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div>
+                <span id="orderModalCategory" class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 text-[10px] font-extrabold uppercase">NON ROOT</span>
+                <h3 id="orderModalTitle" class="text-xl font-black text-white mt-1.5">DRIP WIRE EXTERNAL - SAFE</h3>
+                <p class="text-xs text-slate-400 mt-0.5">Instant Automated Key & Download Link Delivery</p>
+            </div>
+
+            <!-- Plan Duration Selector -->
+            <div class="space-y-2">
+                <label class="block text-xs font-bold uppercase text-slate-400">Select Validity Plan</label>
+                <div class="grid grid-cols-3 gap-2.5" id="planOptionsGrid">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <!-- Player UID / Device ID -->
+            <div class="space-y-1.5">
+                <label class="block text-xs font-bold uppercase text-slate-400">Player UID / Device Name (Optional)</label>
+                <input type="text" id="orderPlayerUid" placeholder="e.g. 1948273645" class="w-full bg-[#070b17] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+            </div>
+
+            <!-- Price & Wallet Summary -->
+            <div class="bg-[#080d1c] border border-slate-800 rounded-xl p-3.5 space-y-2 text-xs">
+                <div class="flex justify-between text-slate-400">
+                    <span>Your Wallet Balance:</span>
+                    <span id="orderModalWallet" class="font-bold text-white">৳0</span>
+                </div>
+                <div class="flex justify-between text-sm font-extrabold text-white border-t border-slate-800 pt-2">
+                    <span>Total Payable:</span>
+                    <span id="orderModalPrice" class="text-emerald-400">৳120</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div id="orderModalActions" class="space-y-2">
+                <button onclick="confirmPurchase()" class="w-full neon-btn py-3 rounded-xl text-sm font-extrabold text-white flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-bolt"></i> Confirm & Buy Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         SECURE CHECKOUT GATEWAY MODAL (BangladeshPay Style)
+    =========================================== -->
+    <div id="checkoutGatewayModal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
+        <div class="w-full max-w-md rounded-2xl bg-[#0b1021] border border-slate-700/80 shadow-2xl overflow-hidden my-auto">
+            <!-- Top Gateway Bar -->
+            <div class="bg-[#121a33] px-5 py-3.5 flex items-center justify-between border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                    <button onclick="closeSecureCheckout()" class="text-slate-400 hover:text-white mr-1">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <span class="text-xs sm:text-sm font-black text-white">💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀</span>
+                </div>
+                <span id="gwTopAmount" class="px-3 py-1 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs font-black">
+                    ৳10.00
+                </span>
+            </div>
+
+            <!-- Step 1: Select Mobile Banking / QR Scan -->
+            <div id="gwStep1" class="p-5 space-y-4">
+                <div class="text-center">
+                    <div class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">TOTAL AMOUNT</div>
+                    <div id="gwMainAmount" class="text-2xl font-black text-white">৳10.00</div>
+                </div>
+
+                <!-- Mobile Banking Tabs -->
+                <div class="grid grid-cols-4 gap-2">
+                    <button onclick="switchMobileProvider('bKash', '#e2136e')" data-prov="bKash" class="prov-btn active py-2 px-1 rounded-xl border-2 border-pink-500 bg-pink-500/10 text-center transition">
+                        <div class="text-xs font-black text-pink-400">bKash</div>
+                        <div class="text-[9px] text-slate-300">Auto QR</div>
+                    </button>
+                    <button onclick="switchMobileProvider('Nagad', '#f7941d')" data-prov="Nagad" class="prov-btn py-2 px-1 rounded-xl border-2 border-slate-800 bg-[#11182d] text-center transition">
+                        <div class="text-xs font-black text-orange-400">Nagad</div>
+                        <div class="text-[9px] text-slate-400">Auto QR</div>
+                    </button>
+                    <button onclick="switchMobileProvider('Rocket', '#8c3494')" data-prov="Rocket" class="prov-btn py-2 px-1 rounded-xl border-2 border-slate-800 bg-[#11182d] text-center transition">
+                        <div class="text-xs font-black text-purple-400">Rocket</div>
+                        <div class="text-[9px] text-slate-400">Personal</div>
+                    </button>
+                    <button onclick="switchMobileProvider('Upay', '#0088cc')" data-prov="Upay" class="prov-btn py-2 px-1 rounded-xl border-2 border-slate-800 bg-[#11182d] text-center transition">
+                        <div class="text-xs font-black text-sky-400">Upay</div>
+                        <div class="text-[9px] text-slate-400">Personal</div>
+                    </button>
+                </div>
+
+                <!-- QR Code Box -->
+                <div class="bg-[#111930] border border-slate-800 rounded-2xl p-4 text-center space-y-2.5">
+                    <div id="gwProviderHeader" class="text-xs font-extrabold text-pink-400">
+                        bKash অ্যাপ দিয়ে স্ক্যান করুন
+                    </div>
+                    <!-- Crisp SVG QR Code -->
+                    <div class="mx-auto w-36 h-36 bg-white p-2.5 rounded-xl shadow-inner flex items-center justify-center">
+                        <svg viewBox="0 0 100 100" class="w-full h-full fill-slate-950">
+                            <rect x="5" y="5" width="25" height="25" fill="none" stroke="#000" stroke-width="5"/>
+                            <rect x="12" y="12" width="11" height="11"/>
+                            <rect x="70" y="5" width="25" height="25" fill="none" stroke="#000" stroke-width="5"/>
+                            <rect x="77" y="12" width="11" height="11"/>
+                            <rect x="5" y="70" width="25" height="25" fill="none" stroke="#000" stroke-width="5"/>
+                            <rect x="12" y="77" width="11" height="11"/>
+                            <rect x="40" y="10" width="8" height="8"/>
+                            <rect x="52" y="18" width="8" height="14"/>
+                            <rect x="10" y="42" width="14" height="8"/>
+                            <rect x="35" y="38" width="12" height="12"/>
+                            <rect x="55" y="42" width="10" height="10"/>
+                            <rect x="75" y="40" width="15" height="8"/>
+                            <rect x="42" y="60" width="8" height="15"/>
+                            <rect x="60" y="65" width="14" height="8"/>
+                            <rect x="80" y="72" width="12" height="18"/>
+                            <rect x="45" y="82" width="18" height="8"/>
+                        </svg>
+                    </div>
+                    <div class="text-[11px] text-slate-300">
+                        Agent / Merchant Number: <span id="gwMerchantNumber" class="font-mono font-bold text-white select-all">01352508146</span>
+                    </div>
+                </div>
+
+                <!-- Bengali Step Instructions -->
+                <ul class="text-[11px] text-slate-300 space-y-1 bg-[#080d1a] p-3 rounded-xl border border-slate-800/80">
+                    <li>• আপনার মোবাইল ব্যাংকিং অ্যাপ ওপেন করে <strong class="text-white">Scan QR</strong> অথবা <strong class="text-white">Send Money</strong> সিলেক্ট করুন।</li>
+                    <li>• সঠিক পরিমাণ <strong id="gwInstructionAmt" class="text-rose-400">৳10.00</strong> সেন্ড করুন।</li>
+                    <li>• নিচে যে নম্বর থেকে টাকা পাঠিয়েছেন সেই ১১ ডিজিটের নম্বরটি দিয়ে <strong class="text-white">VERIFY PAYMENT</strong> চাপুন।</li>
+                </ul>
+
+                <!-- 11-Digit Sender Phone Input -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-slate-300">Mobile number you paid from</label>
+                    <input type="tel" id="gwSenderPhone" maxlength="11" placeholder="01XXXXXXXXX" class="w-full bg-[#070b17] border border-slate-700 rounded-xl px-4 py-2.5 text-center font-mono text-base font-bold text-white tracking-widest focus:outline-none focus:border-pink-500">
+                </div>
+
+                <button onclick="startPaymentVerification()" class="w-full crimson-btn py-3 rounded-xl text-sm font-extrabold text-white tracking-wider uppercase flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-shield-check"></i> VERIFY PAYMENT
+                </button>
+            </div>
+
+            <!-- Step 2: Verifying Progress Animation -->
+            <div id="gwStep2" class="hidden p-8 text-center space-y-5">
+                <div class="mx-auto w-14 h-14 rounded-full border-4 border-pink-500/30 border-t-pink-500 animate-spin"></div>
+                <div>
+                    <h4 class="text-lg font-extrabold text-white">Verifying Payment...</h4>
+                    <p class="text-xs text-slate-400 mt-1">Checking your transaction with 💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀 server...</p>
+                </div>
+                <div class="inline-block px-4 py-1.5 rounded-full bg-slate-800 text-sm font-black text-white" id="gwVerifyingAmt">৳10.00</div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div id="gwProgressBar" class="bg-gradient-to-r from-pink-500 to-rose-500 h-full w-0 transition-all duration-200"></div>
+                </div>
+                <div class="text-xs font-mono text-slate-400" id="gwCountdownText">3.0s</div>
+            </div>
+
+            <!-- Step 3: Payment Under Verification + Instant Demo Credit -->
+            <div id="gwStep3" class="hidden p-7 text-center space-y-4">
+                <div class="mx-auto w-14 h-14 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 text-2xl">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <div>
+                    <h4 class="text-lg font-extrabold text-white">Payment Under Verification</h4>
+                    <p class="text-xs text-slate-400 mt-1">
+                        আপনার পেমেন্ট রিকোয়েস্টটি সফলভাবে জমা হয়েছে। অ্যাডমিন চেক করার সাথে সাথে ব্যালেন্স যুক্ত হয়ে যাবে।
+                    </p>
+                </div>
+                <div class="inline-block px-4 py-1.5 rounded-xl bg-[#131d36] border border-slate-700 text-base font-black text-amber-400" id="gwFinalAmt">৳10.00</div>
+
+                <div class="pt-2 space-y-2.5">
+                    <button onclick="approveDemoDeposit()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-extrabold shadow-lg shadow-emerald-600/25 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> Simulate Instant Approval (Demo)
+                    </button>
+                    <button onclick="closeSecureCheckout()" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition">
+                        Back to Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-[#070b17] py-2.5 text-center text-[10px] text-slate-500 border-t border-slate-800/80">
+                Powered by <span class="font-bold text-slate-400">💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀 AutoPay</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         JAVASCRIPT APPLICATION LOGIC
+    =========================================== -->
+    <script>
+        /* -----------------------------------------------------------
+           2. APPLICATION DATA & STATE (LOCALSTORAGE POWERED)
+        ------------------------------------------------------------ */
+        const DEFAULT_PRODUCTS = [
+            // NON ROOT (8 items)
+            { id: 'nr-1', name: 'DRIP WIRE EXTERNAL - SAFE', category: 'NON ROOT', status: 'ONLINE', price: 120, badge: 'SAFE • NO BAN', desc: 'External Aimbot, ESP Line & Box, 100% Main Account Safe', gradient: 'from-purple-900 via-indigo-900 to-slate-900', accent: '#a855f7', icon: 'fa-droplet', image: '' },
+            { id: 'nr-2', name: 'Rezzx Mods Non Root + iOS', category: 'NON ROOT', status: 'ONLINE', price: 120, badge: 'ANDROID + IOS', desc: 'Smooth Drag Headshot + Hologram ESP for Android & iOS', gradient: 'from-rose-950 via-red-900 to-slate-900', accent: '#f43f5e', icon: 'fa-dragon', image: '' },
+            { id: 'nr-3', name: 'PRIME MOD', category: 'NON ROOT', status: 'ONLINE', price: 70, badge: 'VIP HEADSHOT', desc: 'Auto Headshot + Speed Hack + No Recoil', gradient: 'from-red-950 via-rose-900 to-zinc-950', accent: '#ef4444', icon: 'fa-mask', image: '' },
+            { id: 'nr-4', name: 'Guild Glory Bot', category: 'NON ROOT', status: 'ONLINE', price: 120, badge: 'AUTO GLORY', desc: '24/7 Automated Guild Glory Booster', gradient: 'from-amber-950 via-orange-900 to-slate-900', accent: '#f59e0b', icon: 'fa-shield-halved', image: '' },
+            { id: 'nr-5', name: 'Drip Client - Apkmod', category: 'NON ROOT', status: 'ONLINE', price: 120, badge: 'DIRECT APK', desc: 'Direct Mod APK with Floating Menu', gradient: 'from-indigo-950 via-blue-900 to-slate-900', accent: '#3b82f6', icon: 'fa-bolt', image: '' },
+            { id: 'nr-6', name: 'BalaMod Non Root', category: 'NON ROOT', status: 'ONLINE', price: 120, badge: 'MENU PRO', desc: 'Pro Rank Push Mod Menu', gradient: 'from-fuchsia-950 via-purple-900 to-slate-900', accent: '#d946ef', icon: 'fa-wand-magic-sparkles', image: '' },
+            { id: 'nr-7', name: 'TM PANEL', category: 'NON ROOT', status: 'ONLINE', price: 60, badge: 'BUDGET KING', desc: 'Lightweight Aimlock & Antenna', gradient: 'from-cyan-950 via-sky-900 to-slate-900', accent: '#06b6d4', icon: 'fa-crosshairs', image: '' },
+            { id: 'nr-8', name: 'MYTH PANEL- ANDROID+IOS', category: 'NON ROOT', status: 'OFFLINE', price: 114, badge: 'OFFLINE', desc: 'Currently offline for server upgrade', gradient: 'from-slate-900 via-zinc-900 to-black', accent: '#64748b', icon: 'fa-ghost', image: '' },
+
+            // ROOT (8 items)
+            { id: 'rt-1', name: 'MAXXCRER PRO - ROOT', category: 'ROOT', status: 'ONLINE', price: 150, badge: 'KERNEL AIM', desc: 'Kernel Level Aimbot & Brutal Rage Mode', gradient: 'from-orange-950 via-amber-900 to-slate-900', accent: '#f97316', icon: 'fa-fire', image: '' },
+            { id: 'rt-2', name: 'ANGRY MOD ROOT', category: 'ROOT', status: 'ONLINE', price: 130, badge: 'ROOT ONLY', desc: 'Magisk & KernelSU Supported VIP Root Mod', gradient: 'from-purple-950 via-violet-900 to-slate-900', accent: '#8b5cf6', icon: 'fa-skull', image: '' },
+            { id: 'rt-3', name: 'Hex Blade Cheat - Root', category: 'ROOT', status: 'ONLINE', price: 180, badge: 'PREMIUM CHEAT', desc: 'Zero Blacklist Kernel Bypass', gradient: 'from-rose-950 via-pink-900 to-slate-900', accent: '#ec4899', icon: 'fa-khanda', image: '' },
+            { id: 'rt-4', name: 'ST Modz Kernel Root', category: 'ROOT', status: 'ONLINE', price: 160, badge: 'ROOT PANEL', desc: 'Safe Rank Push Root Panel', gradient: 'from-blue-950 via-indigo-900 to-slate-900', accent: '#6366f1', icon: 'fa-microchip', image: '' },
+            { id: 'rt-5', name: 'DRIP CLIENT ROOT', category: 'ROOT', status: 'ONLINE', price: 90, badge: 'MAGISK / KSU', desc: 'Fast Inject Root Client', gradient: 'from-violet-950 via-purple-900 to-slate-900', accent: '#a855f7', icon: 'fa-terminal', image: '' },
+            { id: 'rt-6', name: 'Replitax Root Injector', category: 'ROOT', status: 'ONLINE', price: 90, badge: 'INJECTOR V4', desc: 'One-Tap Memory Injector', gradient: 'from-emerald-950 via-teal-900 to-slate-900', accent: '#10b981', icon: 'fa-syringe', image: '' },
+            { id: 'rt-7', name: 'ZYTRON PRO - ROOT', category: 'ROOT', status: 'MAINTENANCE', price: 150, badge: 'UPDATING', desc: 'Updating offsets for latest patch', gradient: 'from-slate-900 via-slate-800 to-slate-950', accent: '#94a3b8', icon: 'fa-wrench', image: '' },
+            { id: 'rt-8', name: 'REAPER X PRO - ROOT', category: 'ROOT', status: 'MAINTENANCE', price: 240, badge: 'UPDATING', desc: 'Updating offsets for latest patch', gradient: 'from-slate-900 via-slate-800 to-slate-950', accent: '#94a3b8', icon: 'fa-wrench', image: '' },
+
+            // IPHONE (3 items)
+            { id: 'ios-1', name: 'iOS ZERO PANEL', category: 'IPHONE', status: 'ONLINE', price: 220, badge: 'ESIGN / SCARLET', desc: 'Direct IPA Install via ESign/Scarlet', gradient: 'from-sky-950 via-blue-900 to-slate-900', accent: '#38bdf8', icon: 'fa-mobile-screen', image: '' },
+            { id: 'ios-2', name: 'Shadow iOS IPA VIP', category: 'IPHONE', status: 'ONLINE', price: 250, badge: 'NO JAILBREAK', desc: 'Exclusive 💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀 iOS Aim + ESP', gradient: 'from-indigo-950 via-purple-900 to-slate-900', accent: '#818cf8', icon: 'fa-crown', image: '' },
+            { id: 'ios-3', name: 'iOS AimPro Cert', category: 'IPHONE', status: 'MAINTENANCE', price: 190, badge: 'CERT RENEW', desc: 'Renewing enterprise certificate', gradient: 'from-slate-900 via-slate-800 to-slate-950', accent: '#94a3b8', icon: 'fa-wrench', image: '' },
+
+            // PC (3 items)
+            { id: 'pc-1', name: 'AIMBOT PC EXTERNAL', category: 'PC', status: 'ONLINE', price: 200, badge: 'BLUESTACKS / MSI', desc: 'External Aimbot + Chams for BlueStacks 5 & MSI', gradient: 'from-red-950 via-orange-900 to-slate-900', accent: '#f97316', icon: 'fa-desktop', image: '' },
+            { id: 'pc-2', name: 'VOID PC BYPASS', category: 'PC', status: 'ONLINE', price: 180, badge: 'EMULATOR BYPASS', desc: 'Mobile Lobby Emulator Detection Bypass', gradient: 'from-violet-950 via-indigo-900 to-slate-900', accent: '#8b5cf6', icon: 'fa-shield-virus', image: '' },
+            { id: 'pc-3', name: 'OBS2 REXTRON PC', category: 'PC', status: 'ONLINE', price: 240, badge: 'STREAM PROOF', desc: '100% Stream & Discord Screen-Share Proof', gradient: 'from-amber-950 via-yellow-900 to-slate-900', accent: '#eab308', icon: 'fa-gamepad', image: '' }
+        ];
+
+        const LEADERBOARD_DATA = [
+            { rank: 1, name: 'Shohel Rana', spent: 39075 },
+            { rank: 2, name: 'Somon Mia', spent: 26020 },
+            { rank: 3, name: 'RHR OFFICIAL', spent: 18110 },
+            { rank: 4, name: 'Nader Zora', spent: 15018 },
+            { rank: 5, name: 'Mokbul Hossen', spent: 14350 }
+        ];
+
+        // Pre-configured Admin + Demo User accounts
+        const DEFAULT_ACCOUNTS = [
+            {
+                id: 'acc-admin',
+                role: 'admin',
+                username: 'admin',
+                name: 'Shadow Admin',
+                email: 'admin@shadowmod.com',
+                phone: '01853818741',
+                password: 'shadow1234',
+                balance: 99999
+            },
+            {
+                id: 'acc-demo-user',
+                role: 'user',
+                username: 'shadowuser',
+                name: 'Shadow Gamer',
+                email: 'user@shadowmod.com',
+                phone: '01853818741',
+                password: 'user1234',
+                balance: 250
+            }
+        ];
+
+        // App State (persisted in localStorage)
+        let appState = {
+            accounts: DEFAULT_ACCOUNTS,
+            currentUserId: 'acc-demo-user', // Logged in as demo user initially; can switch/logout anytime
+            products: DEFAULT_PRODUCTS,
+            selectedCategory: 'ALL',
+            selectedGateway: 'Bangladesh Pay',
+            pendingDepositAmount: 0,
+            settings: {
+                announcement: '⚡ Trusted, Fast & Reliable Service with 24/7 Support • 💎 Your Satisfaction Is Our Priority! — 💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀 • 🚀 Instant Key & Panel Delivery 24/7 • 📞 WhatsApp: 01352508146',
+                telegramUrl: 'https://t.me/+pVT4TRGct9k0NzQ1',
+                whatsappNum: '8801352508146',
+                bkashNum: '01352508146',
+                nagadNum: '01352508146'
+            },
+            orders: [
+                {
+                    id: 'ORD-842910',
+                    userId: 'acc-demo-user',
+                    userName: 'Shadow Gamer',
+                    product: 'DRIP WIRE EXTERNAL - SAFE',
+                    plan: '1 Day',
+                    uid: '1948273645',
+                    price: 120,
+                    date: '24 Nov 2026',
+                    status: 'Completed',
+                    licenseKey: 'SHADOW-DRIP-9981-VIPX'
+                }
+            ],
+            transactions: [
+                {
+                    id: 'DEP-551029',
+                    userId: 'acc-demo-user',
+                    type: 'Welcome Bonus',
+                    detail: 'Demo Account Starting Balance',
+                    amount: +250,
+                    date: '24 Nov 2026'
+                }
+            ],
+            deposits: [
+                {
+                    serial: '29981',
+                    userId: 'acc-demo-user',
+                    userName: 'Shadow Gamer',
+                    amount: 50,
+                    method: 'Bangladesh Pay',
+                    senderPhone: '01853818741',
+                    status: 'Completed',
+                    date: '24 Nov 2026'
+                }
+            ],
+            latestOrders: [
+                { user: 'Rasel Viper', product: 'Rezzx Mod - 3 Hour', price: 12 },
+                { user: 'Musarif Sk', product: 'Rezzx Mod - 3 Hour', price: 12 },
+                { user: 'SH A WN', product: 'DRIP WIRE - 3 Hour', price: 25 },
+                { user: 'Akash Das', product: 'DRIP WIRE - 3 Hour', price: 25 },
+                { user: 'Abid Hasan Tasnimul', product: 'Rezzx Mod - 3 Hour', price: 12 }
+            ]
+        };
+
+        // Load saved state if available
+        try {
+            const saved = localStorage.getItem('shadow_mod_unified_v3');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                appState = {
+                    ...appState,
+                    ...parsed,
+                    settings: { ...appState.settings, ...(parsed.settings || {}) }
+                };
+            }
+        } catch (e) {
+            console.warn('Local storage unavailable');
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem('shadow_mod_unified_v3', JSON.stringify(appState));
+            } catch (e) {}
+        }
+
+        function getCurrentUser() {
+            if (!appState.currentUserId) return null;
+            return appState.accounts.find(a => a.id === appState.currentUserId) || null;
+        }
+
+        function isAdminUser() {
+            const u = getCurrentUser();
+            return u && u.role === 'admin';
+        }
+
+        /* -----------------------------------------------------------
+           3. UNIFIED AUTHENTICATION (LOGIN / REGISTER / LOGOUT)
+        ------------------------------------------------------------ */
+        function openAuthModal(tab = 'login') {
+            switchAuthTab(tab);
+            const modal = document.getElementById('authModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeAuthModal() {
+            const modal = document.getElementById('authModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function switchAuthTab(tab) {
+            const loginForm = document.getElementById('loginForm');
+            const regForm = document.getElementById('registerForm');
+            const tabLogin = document.getElementById('authTabLogin');
+            const tabReg = document.getElementById('authTabRegister');
+
+            if (tab === 'login') {
+                loginForm.classList.remove('hidden');
+                regForm.classList.add('hidden');
+                tabLogin.className = 'py-2 rounded-lg text-xs font-extrabold bg-indigo-600 text-white transition';
+                tabReg.className = 'py-2 rounded-lg text-xs font-extrabold text-slate-400 hover:text-white transition';
+            } else {
+                loginForm.classList.add('hidden');
+                regForm.classList.remove('hidden');
+                tabReg.className = 'py-2 rounded-lg text-xs font-extrabold bg-indigo-600 text-white transition';
+                tabLogin.className = 'py-2 rounded-lg text-xs font-extrabold text-slate-400 hover:text-white transition';
+            }
+        }
+
+        function fillDemoLogin(type) {
+            if (type === 'admin') {
+                document.getElementById('loginIdentifier').value = 'admin@shadowmod.com';
+                document.getElementById('loginPassword').value = 'shadow1234';
+            } else {
+                document.getElementById('loginIdentifier').value = 'user@shadowmod.com';
+                document.getElementById('loginPassword').value = 'user1234';
+            }
+        }
+
+        function handleUnifiedLogin(e) {
+            e.preventDefault();
+            const identifier = document.getElementById('loginIdentifier').value.trim().toLowerCase();
+            const password = document.getElementById('loginPassword').value;
+
+            const matched = appState.accounts.find(acc =>
+                (acc.email.toLowerCase() === identifier || (acc.username && acc.username.toLowerCase() === identifier)) &&
+                acc.password === password
+            );
+
+            if (!matched) {
+                showToast('ভুল ইমেইল/ইউজারনেম অথবা পাসওয়ার্ড!', 'error');
+                return;
+            }
+
+            appState.currentUserId = matched.id;
+            saveState();
+            closeAuthModal();
+            syncAllUI();
+
+            if (matched.role === 'admin') {
+                showToast('স্বাগতম অ্যাডমিন! শ্যাডো মোড অ্যাডমিন প্যানেল আনলক হয়েছে।', 'success');
+                navigateTo('admin');
+            } else {
+                showToast(`Welcome back, ${matched.name}!`, 'success');
+                navigateTo('home');
+            }
+        }
+
+        function handleUserRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim().toLowerCase();
+            const phone = document.getElementById('regPhone').value.trim();
+            const password = document.getElementById('regPassword').value;
+
+            if (appState.accounts.some(a => a.email.toLowerCase() === email)) {
+                showToast('এই ইমেইল দিয়ে আগেই অ্যাকাউন্ট খোলা আছে!', 'error');
+                return;
+            }
+
+            const newAcc = {
+                id: 'acc-' + Date.now(),
+                role: 'user',
+                username: email.split('@')[0],
+                name,
+                email,
+                phone,
+                password,
+                balance: 0
+            };
+
+            appState.accounts.push(newAcc);
+            appState.currentUserId = newAcc.id;
+            saveState();
+            e.target.reset();
+            closeAuthModal();
+            syncAllUI();
+            showToast(`অ্যাকাউন্ট তৈরি সফল হয়েছে! স্বাগতম ${name}`, 'success');
+            navigateTo('home');
+        }
+
+        function handleLogout() {
+            appState.currentUserId = null;
+            saveState();
+            toggleUserDrawer(false);
+            syncAllUI();
+            navigateTo('home');
+            showToast('আপনি সফলভাবে লগআউট করেছেন।', 'info');
+        }
+
+        /* -----------------------------------------------------------
+           4. TOAST NOTIFICATIONS
+        ------------------------------------------------------------ */
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            const colors = {
+                success: 'bg-emerald-950/95 border-emerald-500/60 text-emerald-200',
+                error: 'bg-rose-950/95 border-rose-500/60 text-rose-200',
+                info: 'bg-indigo-950/95 border-indigo-500/60 text-indigo-200'
+            };
+            const icons = {
+                success: 'fa-circle-check text-emerald-400',
+                error: 'fa-circle-exclamation text-rose-400',
+                info: 'fa-circle-info text-indigo-400'
+            };
+
+            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-xl border shadow-xl backdrop-blur-md text-xs sm:text-sm font-semibold transition-all duration-300 ${colors[type] || colors.info}`;
+            toast.innerHTML = `<i class="fa-solid ${icons[type] || icons.info} text-base"></i><span>${message}</span>`;
+
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(20px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3400);
+        }
+
+        /* -----------------------------------------------------------
+           5. NAVIGATION & USER DRAWER
+        ------------------------------------------------------------ */
+        function navigateTo(viewName) {
+            const protectedViews = ['account', 'orders', 'codes', 'transactions', 'add-fund'];
+            const currentUser = getCurrentUser();
+
+            if (protectedViews.includes(viewName) && !currentUser) {
+                showToast('এই পেজটি দেখতে আগে লগইন করুন।', 'info');
+                openAuthModal('login');
+                return;
+            }
+
+            if (viewName === 'admin' && !isAdminUser()) {
+                showToast('শুধুমাত্র অ্যাডমিন এই প্যানেলে প্রবেশ করতে পারবেন!', 'error');
+                openAuthModal('login');
+                return;
+            }
+
+            const views = ['home', 'account', 'orders', 'codes', 'transactions', 'add-fund', 'contact', 'admin'];
+            views.forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                if (el) el.classList.add('hidden');
+            });
+
+            const target = document.getElementById(`view-${viewName}`);
+            if (target) target.classList.remove('hidden');
+
+            toggleUserDrawer(false);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            syncAllUI();
+        }
+
+        function toggleUserDrawer(open) {
+            if (open && !getCurrentUser()) {
+                openAuthModal('login');
+                return;
+            }
+            const drawer = document.getElementById('userDrawer');
+            const overlay = document.getElementById('userDrawerOverlay');
+            if (open) {
+                overlay.classList.remove('hidden');
+                drawer.classList.remove('translate-x-full');
+            } else {
+                overlay.classList.add('hidden');
+                drawer.classList.add('translate-x-full');
+            }
+        }
+
+        /* -----------------------------------------------------------
+           5. WELCOME TELEGRAM MODAL
+        ------------------------------------------------------------ */
+        function closeTelegramModal() {
+            const modal = document.getElementById('telegramModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => modal.classList.add('hidden'), 250);
+        }
+
+        function openTelegramModal(e) {
+            if (e) e.preventDefault();
+            const modal = document.getElementById('telegramModal');
+            modal.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+        }
+
+        /* -----------------------------------------------------------
+           6. HERO CAROUSEL SLIDER
+        ------------------------------------------------------------ */
+        let currentSlide = 0;
+        const totalSlides = 2;
+
+        function updateCarousel() {
+            const track = document.getElementById('bannerTrack');
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.getElementById(`dot-${i}`);
+                if (i === currentSlide) {
+                    dot.className = 'w-6 h-1.5 rounded-full bg-white transition-all';
+                } else {
+                    dot.className = 'w-2 h-1.5 rounded-full bg-white/40 transition-all';
+                }
+            }
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToSlide(idx) {
+            currentSlide = idx;
+            updateCarousel();
+        }
+
+        setInterval(nextSlide, 5500);
+
+        /* -----------------------------------------------------------
+           7. PRODUCT FILTERING & CARD RENDERING
+        ------------------------------------------------------------ */
+        function filterCategory(category) {
+            appState.selectedCategory = category;
+
+            // Update pill button styles
+            document.querySelectorAll('.cat-tab').forEach(btn => {
+                if (btn.dataset.cat === category) {
+                    btn.className = 'cat-tab active px-4 py-2 rounded-xl text-xs sm:text-sm font-bold tracking-wide transition bg-white text-slate-950 shadow-lg shadow-white/15';
+                } else {
+                    btn.className = 'cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-bold tracking-wide transition bg-[#11192e] text-slate-300 hover:text-white border border-slate-800';
+                }
+            });
+
+            document.getElementById('currentCategoryTitle').textContent = category === 'ALL' ? 'ALL PANELS' : category;
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const filtered = appState.selectedCategory === 'ALL'
+                ? appState.products
+                : appState.products.filter(p => p.category === appState.selectedCategory);
+
+            document.getElementById('itemCountBadge').textContent = `${filtered.length} Items`;
+
+            grid.innerHTML = filtered.map(product => {
+                const isOnline = product.status === 'ONLINE';
+                const isMaintenance = product.status === 'MAINTENANCE';
+
+                let statusBadgeHtml = '';
+                if (isOnline) {
+                    statusBadgeHtml = `
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-black/70 backdrop-blur-md border border-emerald-500/40 text-[10px] font-extrabold text-emerald-400 tracking-wider">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ONLINE
+                        </span>`;
+                } else if (isMaintenance) {
+                    statusBadgeHtml = `
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-black/75 backdrop-blur-md border border-amber-500/40 text-[10px] font-extrabold text-amber-400 tracking-wider">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> MAINTENANCE
+                        </span>`;
+                } else {
+                    statusBadgeHtml = `
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-black/75 backdrop-blur-md border border-rose-500/40 text-[10px] font-extrabold text-rose-400 tracking-wider">
+                            <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> OFFLINE
+                        </span>`;
+                }
+
+                const maintenanceOverlay = !isOnline ? `
+                    <div class="absolute inset-0 bg-slate-950/75 backdrop-blur-[2px] flex flex-col items-center justify-center p-4 text-center z-10">
+                        <div class="w-10 h-10 rounded-full bg-slate-800/90 border border-slate-700 flex items-center justify-center text-slate-300 mb-2">
+                            <i class="fa-solid ${isMaintenance ? 'fa-wrench' : 'fa-power-off'}"></i>
+                        </div>
+                        <div class="text-xs font-black tracking-wider text-white uppercase">
+                            ${isMaintenance ? 'UNDER MAINTENANCE' : 'PRODUCT OFFLINE'}
+                        </div>
+                        <div class="text-[10px] text-slate-400 mt-0.5">BACK SOON</div>
+                    </div>` : '';
+
+                const ctaButton = isOnline
+                    ? `<button onclick="openOrderModal('${product.id}')" class="w-full neon-btn py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white tracking-wide">
+                            Order Now
+                       </button>`
+                    : `<button disabled class="w-full py-2.5 rounded-xl bg-slate-800/70 border border-slate-700/60 text-slate-500 text-xs sm:text-sm font-bold cursor-not-allowed">
+                            Purchase Disabled
+                       </button>`;
+
+                const bgImageHtml = product.image
+                    ? `<img src="${product.image}" alt="${product.name}" onerror="this.style.display='none'" class="absolute inset-0 w-full h-full object-cover opacity-55">`
+                    : '';
+
+                return `
+                    <div class="glass-card glass-card-hover rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <!-- Stylized Gaming Artwork Banner -->
+                        <div class="relative h-44 bg-gradient-to-br ${product.gradient || 'from-indigo-950 via-slate-900 to-black'} p-4 flex flex-col justify-between overflow-hidden border-b border-slate-800/80">
+                            ${bgImageHtml}
+                            <!-- Decorative Cyber Grid -->
+                            <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(${product.accent || '#6366f1'} 1px, transparent 1px); background-size: 14px 14px;"></div>
+
+                            <div class="relative z-20 flex items-center justify-between">
+                                ${statusBadgeHtml}
+                                <span class="px-2 py-0.5 rounded bg-black/50 text-[9px] font-bold text-slate-300 border border-white/10">
+                                    ${product.category}
+                                </span>
+                            </div>
+
+                            <!-- Center Emblem & Title Art -->
+                            <div class="relative z-0 flex flex-col items-center justify-center text-center my-auto">
+                                <div class="w-12 h-12 rounded-2xl bg-black/50 border border-white/15 flex items-center justify-center mb-2 shadow-lg" style="color: ${product.accent || '#38bdf8'}">
+                                    <i class="fa-solid ${product.icon || 'fa-skull'} text-2xl"></i>
+                                </div>
+                                <div class="text-sm font-black uppercase tracking-wider text-white drop-shadow">
+                                    ${product.name}
+                                </div>
+                                <span class="mt-1 px-2.5 py-0.5 rounded-full text-[9px] font-extrabold tracking-widest bg-black/60 text-slate-200 border border-white/10">
+                                    ${product.badge || 'VIP PANEL'}
+                                </span>
+                            </div>
+
+                            ${maintenanceOverlay}
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-4 space-y-3 bg-[#0c1326]/90">
+                            <div>
+                                <h3 class="text-sm font-bold text-white truncate" title="${product.name}">
+                                    ${product.name}
+                                </h3>
+                                <p class="text-[11px] text-slate-400 truncate mt-0.5">${product.desc || 'Instant Automated Delivery'}</p>
+                            </div>
+
+                            <div class="flex items-center justify-between bg-[#070b17] border border-slate-800/90 rounded-xl px-3.5 py-2">
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">PRICE :</span>
+                                <span class="text-sm font-black text-white">৳${product.price} <span class="text-slate-500 text-xs">+</span></span>
+                            </div>
+
+                            ${ctaButton}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        /* -----------------------------------------------------------
+           8. ORDER MODAL & PURCHASE FLOW
+        ------------------------------------------------------------ */
+        let activeOrderProduct = null;
+        let selectedPlan = { label: '1 Day', multiplier: 1 };
+
+        function openOrderModal(productId) {
+            const currentUser = getCurrentUser();
+            if (!currentUser) {
+                showToast('প্যানেল অর্ডার করতে আগে লগইন করুন!', 'info');
+                openAuthModal('login');
+                return;
+            }
+
+            const product = appState.products.find(p => p.id === productId);
+            if (!product || product.status !== 'ONLINE') return;
+
+            activeOrderProduct = product;
+            selectedPlan = { label: '1 Day', multiplier: 1 };
+
+            document.getElementById('orderModalCategory').textContent = product.category;
+            document.getElementById('orderModalTitle').textContent = product.name;
+            document.getElementById('orderModalDesc').textContent = product.desc || 'Instant Automated Key & Download Link Delivery';
+            document.getElementById('orderPlayerUid').value = '';
+
+            renderOrderPlans();
+            updateOrderSummary();
+
+            const modal = document.getElementById('orderModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById('orderModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function renderOrderPlans() {
+            const plans = [
+                { label: '1 Day', multiplier: 1 },
+                { label: '7 Days', multiplier: 3.5 },
+                { label: '30 Days', multiplier: 8 }
+            ];
+
+            const grid = document.getElementById('planOptionsGrid');
+            grid.innerHTML = plans.map(pl => {
+                const planPrice = Math.round(activeOrderProduct.price * pl.multiplier);
+                const isSelected = selectedPlan.label === pl.label;
+                return `
+                    <button type="button" onclick="selectOrderPlan('${pl.label}', ${pl.multiplier})"
+                        class="p-2.5 rounded-xl border text-center transition ${isSelected ? 'bg-indigo-600/20 border-indigo-500 text-white' : 'bg-[#080d1c] border-slate-800 text-slate-400 hover:border-slate-700'}">
+                        <div class="text-xs font-extrabold">${pl.label}</div>
+                        <div class="text-[11px] font-bold text-emerald-400 mt-0.5">৳${planPrice}</div>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function selectOrderPlan(label, multiplier) {
+            selectedPlan = { label, multiplier };
+            renderOrderPlans();
+            updateOrderSummary();
+        }
+
+        function updateOrderSummary() {
+            const currentUser = getCurrentUser();
+            const bal = currentUser ? currentUser.balance : 0;
+            const finalPrice = Math.round(activeOrderProduct.price * selectedPlan.multiplier);
+            document.getElementById('orderModalWallet').textContent = `৳${bal}`;
+            document.getElementById('orderModalPrice').textContent = `৳${finalPrice}`;
+
+            const actions = document.getElementById('orderModalActions');
+            if (bal >= finalPrice) {
+                actions.innerHTML = `
+                    <button onclick="confirmPurchase()" class="w-full neon-btn py-3 rounded-xl text-sm font-extrabold text-white flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> Confirm & Buy Now (৳${finalPrice})
+                    </button>`;
+            } else {
+                const needed = finalPrice - bal;
+                actions.innerHTML = `
+                    <div class="text-center text-xs text-rose-400 font-semibold mb-1.5">
+                        Insufficient balance! You need ৳${needed} more.
+                    </div>
+                    <button onclick="closeOrderModal(); navigateTo('add-fund'); setDepositAmount(${needed});" class="w-full crimson-btn py-3 rounded-xl text-sm font-extrabold text-white flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-wallet"></i> Add ৳${needed} to Wallet
+                    </button>`;
+            }
+        }
+
+        function generateLicenseKey() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            const seg = () => Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+            return `SHADOW-${seg()}-${seg()}-${seg()}`;
+        }
+
+        function confirmPurchase() {
+            const currentUser = getCurrentUser();
+            if (!currentUser) return;
+
+            const finalPrice = Math.round(activeOrderProduct.price * selectedPlan.multiplier);
+            if (currentUser.balance < finalPrice) {
+                showToast('Insufficient wallet balance!', 'error');
+                return;
+            }
+
+            const uid = document.getElementById('orderPlayerUid').value.trim() || 'Universal Device';
+            const licenseKey = generateLicenseKey();
+            const orderId = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+            const now = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+
+            // Deduct balance from user account
+            currentUser.balance -= finalPrice;
+
+            // Record Order (Admin can also see & edit key in Admin Panel)
+            appState.orders.unshift({
+                id: orderId,
+                userId: currentUser.id,
+                userName: currentUser.name,
+                product: activeOrderProduct.name,
+                plan: selectedPlan.label,
+                uid,
+                price: finalPrice,
+                date: now,
+                status: 'Completed',
+                licenseKey
+            });
+
+            // Record Transaction
+            appState.transactions.unshift({
+                id: 'TXN-' + Math.floor(100000 + Math.random() * 900000),
+                userId: currentUser.id,
+                type: 'Panel Purchase',
+                detail: `${activeOrderProduct.name} (${selectedPlan.label})`,
+                amount: -finalPrice,
+                date: now
+            });
+
+            // Add to live Latest Orders feed
+            appState.latestOrders.unshift({
+                user: currentUser.name,
+                product: `${activeOrderProduct.name} - ${selectedPlan.label}`,
+                price: finalPrice
+            });
+
+            saveState();
+            syncAllUI();
+            closeOrderModal();
+            showToast(`Purchased ${activeOrderProduct.name}! Key generated in My Codes.`, 'success');
+            navigateTo('codes');
+        }
+
+        /* -----------------------------------------------------------
+           9. ADD FUND & SECURE CHECKOUT GATEWAY
+        ------------------------------------------------------------ */
+        function selectPaymentGateway(gatewayName) {
+            appState.selectedGateway = gatewayName;
+            document.querySelectorAll('.gw-card').forEach(card => {
+                const check = card.querySelector('.gw-check');
+                if (card.dataset.gw === gatewayName) {
+                    card.className = 'gw-card active text-left p-4 rounded-xl bg-[#131d36] border-2 border-indigo-500 transition relative';
+                    check.classList.remove('hidden');
+                } else {
+                    card.className = 'gw-card text-left p-4 rounded-xl bg-[#0d1426] border-2 border-slate-800 hover:border-slate-700 transition relative';
+                    check.classList.add('hidden');
+                }
+            });
+        }
+
+        function setDepositAmount(amt) {
+            document.getElementById('depositAmountInput').value = amt;
+        }
+
+        function openSecureCheckout() {
+            const currentUser = getCurrentUser();
+            if (!currentUser) {
+                openAuthModal('login');
+                return;
+            }
+
+            const rawVal = parseFloat(document.getElementById('depositAmountInput').value);
+            if (isNaN(rawVal) || rawVal < 10) {
+                showToast('Please enter a valid amount (Minimum ৳10).', 'error');
+                return;
+            }
+
+            appState.pendingDepositAmount = rawVal;
+            const formatted = `৳${rawVal.toFixed(2)}`;
+
+            document.getElementById('gwTopAmount').textContent = formatted;
+            document.getElementById('gwMainAmount').textContent = formatted;
+            document.getElementById('gwInstructionAmt').textContent = formatted;
+            document.getElementById('gwVerifyingAmt').textContent = formatted;
+            document.getElementById('gwFinalAmt').textContent = formatted;
+            document.getElementById('gwSenderPhone').value = currentUser.phone || '';
+            document.getElementById('gwMerchantNumber').textContent = appState.settings.bkashNum || '01352508146';
+
+            // Reset gateway to Step 1
+            document.getElementById('gwStep1').classList.remove('hidden');
+            document.getElementById('gwStep2').classList.add('hidden');
+            document.getElementById('gwStep3').classList.add('hidden');
+
+            const modal = document.getElementById('checkoutGatewayModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeSecureCheckout() {
+            const modal = document.getElementById('checkoutGatewayModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function switchMobileProvider(provider, color) {
+            document.querySelectorAll('.prov-btn').forEach(btn => {
+                if (btn.dataset.prov === provider) {
+                    btn.style.borderColor = color;
+                    btn.classList.add('bg-white/5');
+                } else {
+                    btn.style.borderColor = '#1e293b';
+                    btn.classList.remove('bg-white/5');
+                }
+            });
+            document.getElementById('gwProviderHeader').textContent = `${provider} অ্যাপ দিয়ে স্ক্যান করুন`;
+            document.getElementById('gwProviderHeader').style.color = color;
+            const num = provider === 'Nagad' ? appState.settings.nagadNum : appState.settings.bkashNum;
+            document.getElementById('gwMerchantNumber').textContent = num || '01352508146';
+        }
+
+        let verifyInterval = null;
+        function startPaymentVerification() {
+            const currentUser = getCurrentUser();
+            const phone = document.getElementById('gwSenderPhone').value.trim();
+            if (!/^01\d{9}$/.test(phone)) {
+                showToast('Please enter a valid 11-digit Bangladeshi mobile number (01XXXXXXXXX).', 'error');
+                return;
+            }
+
+            document.getElementById('gwStep1').classList.add('hidden');
+            document.getElementById('gwStep2').classList.remove('hidden');
+
+            let secondsLeft = 3.0;
+            const progressBar = document.getElementById('gwProgressBar');
+            const countdownText = document.getElementById('gwCountdownText');
+            progressBar.style.width = '0%';
+
+            clearInterval(verifyInterval);
+            verifyInterval = setInterval(() => {
+                secondsLeft = Math.max(0, secondsLeft - 0.1);
+                const pct = ((3.0 - secondsLeft) / 3.0) * 100;
+                progressBar.style.width = `${pct}%`;
+                countdownText.textContent = `${secondsLeft.toFixed(1)}s`;
+
+                if (secondsLeft <= 0) {
+                    clearInterval(verifyInterval);
+                    document.getElementById('gwStep2').classList.add('hidden');
+                    document.getElementById('gwStep3').classList.remove('hidden');
+
+                    // Record pending deposit (Visible in Admin Panel -> Deposit Requests)
+                    const serial = String(Math.floor(30000 + Math.random() * 69999));
+                    const now = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+                    appState.deposits.unshift({
+                        serial,
+                        userId: currentUser.id,
+                        userName: currentUser.name,
+                        amount: appState.pendingDepositAmount,
+                        method: appState.selectedGateway,
+                        senderPhone: phone,
+                        status: 'Under Verification',
+                        date: now
+                    });
+                    saveState();
+                    syncAllUI();
+                }
+            }, 100);
+        }
+
+        function approveDemoDeposit() {
+            const currentUser = getCurrentUser();
+            const amt = appState.pendingDepositAmount;
+            if (!currentUser || amt <= 0) return;
+
+            currentUser.balance += amt;
+            if (appState.deposits.length > 0 && appState.deposits[0].status === 'Under Verification') {
+                appState.deposits[0].status = 'Completed';
+            }
+
+            const now = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            appState.transactions.unshift({
+                id: 'DEP-' + Math.floor(100000 + Math.random() * 900000),
+                userId: currentUser.id,
+                type: 'Wallet Deposit',
+                detail: `${appState.selectedGateway} Auto Topup`,
+                amount: +amt,
+                date: now
+            });
+
+            appState.pendingDepositAmount = 0;
+            saveState();
+            syncAllUI();
+            closeSecureCheckout();
+            showToast(`৳${amt} added to your 💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀 wallet!`, 'success');
+        }
+
+        /* -----------------------------------------------------------
+           10. ADMIN PANEL CONTROLLER FUNCTIONS
+        ------------------------------------------------------------ */
+        function switchAdminTab(tabName) {
+            ['panels', 'orders', 'deposits', 'settings'].forEach(t => {
+                document.getElementById(`admin-tab-${t}`).classList.add('hidden');
+            });
+            document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
+
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                if (btn.dataset.admintab === tabName) {
+                    btn.className = 'admin-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white';
+                } else {
+                    btn.className = 'admin-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#11192e] text-slate-300 hover:text-white border border-slate-800';
+                }
+            });
+        }
+
+        function handleAdminSavePanel(e) {
+            e.preventDefault();
+            if (!isAdminUser()) return;
+
+            const editId = document.getElementById('editPanelId').value;
+            const name = document.getElementById('adminPName').value.trim();
+            const category = document.getElementById('adminPCat').value;
+            const price = parseFloat(document.getElementById('adminPPrice').value);
+            const status = document.getElementById('adminPStatus').value;
+            const badge = document.getElementById('adminPBadge').value.trim() || 'VIP PANEL';
+            const image = document.getElementById('adminPImage').value.trim();
+            const desc = document.getElementById('adminPDesc').value.trim() || 'Instant Automated Key & Download Link';
+
+            if (editId) {
+                const idx = appState.products.findIndex(p => p.id === editId);
+                if (idx !== -1) {
+                    appState.products[idx] = { ...appState.products[idx], name, category, price, status, badge, image, desc };
+                    showToast(`Updated panel: ${name}`, 'success');
+                }
+            } else {
+                const newPanel = {
+                    id: 'pnl-' + Date.now(),
+                    name,
+                    category,
+                    price,
+                    status,
+                    badge,
+                    image,
+                    desc,
+                    gradient: 'from-indigo-950 via-purple-900 to-slate-900',
+                    accent: '#38bdf8',
+                    icon: 'fa-skull'
+                };
+                appState.products.unshift(newPanel);
+                showToast(`New panel "${name}" added to store!`, 'success');
+            }
+
+            resetAdminPanelForm();
+            saveState();
+            renderProducts();
+            syncAllUI();
+        }
+
+        function editAdminPanel(id) {
+            const p = appState.products.find(item => item.id === id);
+            if (!p) return;
+            document.getElementById('editPanelId').value = p.id;
+            document.getElementById('adminPName').value = p.name;
+            document.getElementById('adminPCat').value = p.category;
+            document.getElementById('adminPPrice').value = p.price;
+            document.getElementById('adminPStatus').value = p.status;
+            document.getElementById('adminPBadge').value = p.badge || '';
+            document.getElementById('adminPImage').value = p.image || '';
+            document.getElementById('adminPDesc').value = p.desc || '';
+
+            document.getElementById('adminPanelFormTitle').textContent = `Edit Panel: ${p.name}`;
+            document.getElementById('adminSavePanelBtn').innerHTML = `<i class="fa-solid fa-check mr-1.5"></i> Update Panel`;
+            document.getElementById('cancelEditPanelBtn').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetAdminPanelForm() {
+            document.getElementById('editPanelId').value = '';
+            document.getElementById('adminPName').value = '';
+            document.getElementById('adminPPrice').value = '';
+            document.getElementById('adminPBadge').value = '';
+            document.getElementById('adminPImage').value = '';
+            document.getElementById('adminPDesc').value = '';
+            document.getElementById('adminPanelFormTitle').textContent = '+ Add New Panel / Product';
+            document.getElementById('adminSavePanelBtn').innerHTML = `<i class="fa-solid fa-plus mr-1.5"></i> Save Panel`;
+            document.getElementById('cancelEditPanelBtn').classList.add('hidden');
+        }
+
+        function adminQuickStatusChange(id, newStatus) {
+            if (!isAdminUser()) return;
+            const p = appState.products.find(item => item.id === id);
+            if (p) {
+                p.status = newStatus;
+                saveState();
+                renderProducts();
+                syncAllUI();
+                showToast(`${p.name} status set to ${newStatus}`, 'info');
+            }
+        }
+
+        function adminDeletePanel(id) {
+            if (!isAdminUser()) return;
+            appState.products = appState.products.filter(p => p.id !== id);
+            saveState();
+            renderProducts();
+            syncAllUI();
+            showToast('Panel deleted from store.', 'info');
+        }
+
+        function adminUpdateOrderKey(orderId) {
+            if (!isAdminUser()) return;
+            const ord = appState.orders.find(o => o.id === orderId);
+            if (!ord) return;
+            const inputEl = document.getElementById(`adminKeyInput_${orderId}`);
+            const newKey = inputEl ? inputEl.value.trim() : '';
+            if (!newKey) {
+                showToast('Please enter a valid License Key first!', 'error');
+                return;
+            }
+            ord.licenseKey = newKey;
+            ord.status = 'Completed';
+            saveState();
+            syncAllUI();
+            showToast(`License Key updated & delivered for ${ord.id}!`, 'success');
+        }
+
+        function adminApproveDeposit(serial) {
+            if (!isAdminUser()) return;
+            const dep = appState.deposits.find(d => d.serial === serial);
+            if (!dep || dep.status === 'Completed') return;
+
+            dep.status = 'Completed';
+            const userAcc = appState.accounts.find(a => a.id === dep.userId);
+            if (userAcc) {
+                userAcc.balance += Number(dep.amount);
+                appState.transactions.unshift({
+                    id: 'DEP-' + dep.serial,
+                    userId: userAcc.id,
+                    type: 'Deposit Approved',
+                    detail: `${dep.method} Verified by Admin`,
+                    amount: +Number(dep.amount),
+                    date: dep.date
+                });
+            }
+            saveState();
+            syncAllUI();
+            showToast(`Deposit #${serial} (৳${dep.amount}) approved & credited!`, 'success');
+        }
+
+        function adminRejectDeposit(serial) {
+            if (!isAdminUser()) return;
+            const dep = appState.deposits.find(d => d.serial === serial);
+            if (!dep) return;
+            dep.status = 'Rejected';
+            saveState();
+            syncAllUI();
+            showToast(`Deposit #${serial} marked as Rejected.`, 'info');
+        }
+
+        function handleAdminSaveSettings(e) {
+            e.preventDefault();
+            if (!isAdminUser()) return;
+            appState.settings.announcement = document.getElementById('setAnnouncement').value.trim();
+            appState.settings.telegramUrl = document.getElementById('setTelegramUrl').value.trim();
+            appState.settings.whatsappNum = document.getElementById('setWhatsappNum').value.trim();
+            appState.settings.bkashNum = document.getElementById('setBkashNum').value.trim();
+            appState.settings.nagadNum = document.getElementById('setNagadNum').value.trim();
+            saveState();
+            syncAllUI();
+            showToast('Site settings saved & applied live!', 'success');
+        }
+
+        /* -----------------------------------------------------------
+           11. ACCOUNT & CONTACT FORM HANDLERS
+        ------------------------------------------------------------ */
+        function handleUpdateProfile(e) {
+            e.preventDefault();
+            const currentUser = getCurrentUser();
+            if (!currentUser) return;
+            currentUser.name = document.getElementById('inputFullName').value.trim() || currentUser.name;
+            currentUser.email = document.getElementById('inputEmail').value.trim() || currentUser.email;
+            currentUser.phone = document.getElementById('inputPhone').value.trim();
+            saveState();
+            syncAllUI();
+            showToast('Profile information updated successfully!', 'success');
+        }
+
+        function handleChangePassword(e) {
+            e.preventDefault();
+            const currentUser = getCurrentUser();
+            if (!currentUser) return;
+            const p1 = document.getElementById('newPassInput').value;
+            const p2 = document.getElementById('confirmPassInput').value;
+            if (p1 !== p2) {
+                showToast('New password and confirm password do not match!', 'error');
+                return;
+            }
+            currentUser.password = p1;
+            saveState();
+            e.target.reset();
+            showToast('Password updated successfully!', 'success');
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            e.target.reset();
+            showToast('Your message has been sent to 💀𝐒𝐇𝐀𝐃𝐎𝐖 𝐌𝐎𝐃💀 Support!', 'success');
+        }
+
+        function copyLicenseCode(codeText) {
+            const temp = document.createElement('textarea');
+            temp.value = codeText;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast(`Copied Key: ${codeText}`, 'success');
+        }
+
+        /* -----------------------------------------------------------
+           12. SYNC ALL UI COMPONENTS
+        ------------------------------------------------------------ */
+        function syncAllUI() {
+            const currentUser = getCurrentUser();
+            const adminMode = isAdminUser();
+
+            // Apply Site Settings
+            const tickerEl = document.getElementById('announcementTickerText');
+            const waClean = (appState.settings.whatsappNum || '8801352508146').replace(/\D/g, '');
+            document.getElementById('footerWhatsappLink').href = `https://wa.me/${waClean}`;
+            document.getElementById('floatingWhatsappPill').href = `https://wa.me/${waClean}`;
+            document.getElementById('footerWhatsappText').textContent = `+${waClean}`;
+            const tgUrl = appState.settings.telegramUrl || 'https://t.me/+pVT4TRGct9k0NzQ1';
+            document.getElementById('modalTelegramJoinBtn').href = tgUrl;
+            const footerTg = document.getElementById('footerTelegramLink');
+            if (footerTg) footerTg.href = tgUrl;
+
+            // Header Auth & Role Visibility
+            const headerAdminBtn = document.getElementById('headerAdminBtn');
+            const headerWalletBtn = document.getElementById('headerWalletBtn');
+            const headerLoginBtn = document.getElementById('headerLoginBtn');
+            const headerAvatarBtn = document.getElementById('headerAvatarBtn');
+            const drawerAdminLink = document.getElementById('drawerAdminLink');
+            const drawerRoleBadge = document.getElementById('drawerRoleBadge');
+
+            if (currentUser) {
+                headerLoginBtn.classList.add('hidden');
+                headerLoginBtn.classList.remove('inline-flex');
+                headerAvatarBtn.classList.remove('hidden');
+                headerWalletBtn.classList.remove('hidden');
+
+                const initial = (currentUser.name || 'S').charAt(0).toUpperCase();
+                document.getElementById('navBalance').textContent = `৳ ${currentUser.balance}`;
+                document.getElementById('navAvatarInitial').textContent = initial;
+                document.getElementById('drawerAvatarBadge').textContent = initial;
+                document.getElementById('drawerUserName').textContent = currentUser.name;
+                document.getElementById('drawerUserEmail').textContent = currentUser.email;
+
+                if (adminMode) {
+                    headerAdminBtn.classList.remove('hidden');
+                    headerAdminBtn.classList.add('inline-flex');
+                    drawerAdminLink.classList.remove('hidden');
+                    drawerAdminLink.classList.add('flex');
+                    drawerRoleBadge.classList.remove('hidden');
+                } else {
+                    headerAdminBtn.classList.add('hidden');
+                    headerAdminBtn.classList.remove('inline-flex');
+                    drawerAdminLink.classList.add('hidden');
+                    drawerAdminLink.classList.remove('flex');
+                    drawerRoleBadge.classList.add('hidden');
+                }
+
+                // Account stats for current user
+                const myOrders = appState.orders.filter(o => o.userId === currentUser.id);
+                const myTx = appState.transactions.filter(t => t.userId === currentUser.id);
+                const myDeps = appState.deposits.filter(d => d.userId === currentUser.id);
+                const totalSpent = myOrders.reduce((sum, o) => sum + o.price, 0);
+
+                document.getElementById('accDisplayName').textContent = currentUser.name;
+                document.getElementById('accDisplayEmail').textContent = currentUser.email;
+                document.getElementById('inputFullName').value = currentUser.name;
+                document.getElementById('inputEmail').value = currentUser.email;
+                document.getElementById('inputPhone').value = currentUser.phone || '';
+                document.getElementById('accBalanceStat').textContent = `৳${currentUser.balance}`;
+                document.getElementById('accOrderStat').textContent = myOrders.length;
+                document.getElementById('accSpentStat').textContent = `৳${totalSpent}`;
+                document.getElementById('addFundCurrentBal').textContent = `৳${currentUser.balance}`;
+
+                // User Orders View
+                const ordersList = document.getElementById('userOrdersList');
+                ordersList.innerHTML = myOrders.length === 0
+                    ? `<div class="glass-card rounded-2xl p-8 text-center text-sm text-slate-400">You haven't purchased any panels yet. Browse the store to order!</div>`
+                    : myOrders.map(o => `
+                        <div class="glass-card rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div>
+                                <div class="text-xs text-indigo-400 font-bold">${o.id} • ${o.date}</div>
+                                <div class="text-sm font-extrabold text-white mt-0.5">${o.product} (${o.plan})</div>
+                                <div class="text-xs text-slate-400">Target UID: ${o.uid}</div>
+                            </div>
+                            <div class="flex sm:flex-col items-center sm:items-end justify-between gap-1">
+                                <span class="text-sm font-black text-white">৳${o.price}</span>
+                                <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-bold">${o.status}</span>
+                            </div>
+                        </div>
+                    `).join('');
+
+                // User Activation Codes View
+                const codesList = document.getElementById('userCodesList');
+                codesList.innerHTML = myOrders.length === 0
+                    ? `<div class="glass-card rounded-2xl p-8 text-center text-sm text-slate-400 col-span-full">No active license keys found. Buy a panel to receive instant keys!</div>`
+                    : myOrders.map(c => `
+                        <div class="glass-card rounded-xl p-4 space-y-2.5 border-indigo-500/30">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-extrabold text-white">${c.product}</span>
+                                <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-[10px] font-bold">${c.plan}</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-[#070b17] border border-slate-800 rounded-lg px-3 py-2">
+                                <code class="text-xs font-mono font-bold text-emerald-400 select-all">${c.licenseKey}</code>
+                                <button onclick="copyLicenseCode('${c.licenseKey}')" class="text-xs font-bold text-slate-300 hover:text-white px-2 py-1 rounded bg-slate-800">
+                                    <i class="fa-regular fa-copy"></i> Copy
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+
+                // User Transactions View
+                const txList = document.getElementById('userTransactionsList');
+                txList.innerHTML = myTx.length === 0
+                    ? `<div class="glass-card rounded-2xl p-8 text-center text-sm text-slate-400">No wallet transactions recorded yet.</div>`
+                    : myTx.map(t => `
+                        <div class="glass-card rounded-xl p-4 flex items-center justify-between">
+                            <div>
+                                <div class="text-xs font-bold text-white">${t.type} • <span class="text-slate-400 font-normal">${t.detail}</span></div>
+                                <div class="text-[11px] text-slate-500 mt-0.5">${t.id} • ${t.date}</div>
+                            </div>
+                            <div class="text-sm font-black ${t.amount >= 0 ? 'text-emerald-400' : 'text-rose-400'}">
+                                ${t.amount >= 0 ? '+' : ''}৳${Math.abs(t.amount)}
+                            </div>
+                        </div>
+                    `).join('');
+
+                // Deposits History
+                const depList = document.getElementById('depositsHistoryList');
+                depList.innerHTML = myDeps.length === 0
+                    ? `<div class="text-xs text-slate-400">No deposits found yet.</div>`
+                    : myDeps.map(d => `
+                        <div class="bg-[#090e1c] border border-slate-800/90 rounded-xl px-4 py-3 flex items-center justify-between text-xs">
+                            <div>
+                                <span class="font-bold text-slate-300">Serial ID: ${d.serial}</span>
+                                <span class="text-slate-500 mx-1.5">•</span>
+                                <span class="text-slate-400">${d.method}</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="font-black text-white">Amount: ৳${d.amount}</span>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${d.status === 'Completed' ? 'bg-emerald-500/15 text-emerald-400' : d.status === 'Rejected' ? 'bg-rose-500/15 text-rose-400' : 'bg-amber-500/15 text-amber-400'}">
+                                    ${d.status}
+                                </span>
+                            </div>
+                        </div>
+                    `).join('');
+            } else {
+                // Logged out state
+                headerLoginBtn.classList.remove('hidden');
+                headerLoginBtn.classList.add('inline-flex');
+                headerAvatarBtn.classList.add('hidden');
+                headerWalletBtn.classList.add('hidden');
+                headerAdminBtn.classList.add('hidden');
+                headerAdminBtn.classList.remove('inline-flex');
+            }
+
+            // Sync Admin Dashboard Data if Admin is logged in
+            if (adminMode) {
+                document.getElementById('adminStatPanels').textContent = appState.products.length;
+                document.getElementById('adminStatOrders').textContent = appState.orders.length;
+                document.getElementById('adminStatDeposits').textContent = appState.deposits.filter(d => d.status === 'Under Verification').length;
+                document.getElementById('adminStatUsers').textContent = appState.accounts.length;
+
+                // Admin Panels Table
+                const tbody = document.getElementById('adminPanelsTableBody');
+                tbody.innerHTML = appState.products.map(p => `
+                    <tr class="hover:bg-slate-800/30">
+                        <td class="py-3 px-2 font-bold text-white">${p.name}</td>
+                        <td class="py-3 px-2 text-xs text-slate-300">${p.category}</td>
+                        <td class="py-3 px-2 font-black text-emerald-400">৳${p.price}</td>
+                        <td class="py-3 px-2">
+                            <select onchange="adminQuickStatusChange('${p.id}', this.value)" class="bg-[#090e1c] border border-slate-700 rounded-lg px-2.5 py-1 text-xs font-bold text-white">
+                                <option value="ONLINE" ${p.status === 'ONLINE' ? 'selected' : ''}>ONLINE</option>
+                                <option value="MAINTENANCE" ${p.status === 'MAINTENANCE' ? 'selected' : ''}>MAINTENANCE</option>
+                                <option value="OFFLINE" ${p.status === 'OFFLINE' ? 'selected' : ''}>OFFLINE</option>
+                            </select>
+                        </td>
+                        <td class="py-3 px-2 text-right space-x-1.5">
+                            <button onclick="editAdminPanel('${p.id}')" class="px-2.5 py-1 rounded-lg bg-indigo-600/25 hover:bg-indigo-600/40 text-indigo-300 text-xs font-bold">
+                                <i class="fa-solid fa-pen"></i> Edit
+                            </button>
+                            <button onclick="adminDeletePanel('${p.id}')" class="px-2.5 py-1 rounded-lg bg-rose-600/20 hover:bg-rose-600/40 text-rose-400 text-xs font-bold">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+
+                // Admin Orders List
+                const adminOrdersEl = document.getElementById('adminOrdersContainer');
+                adminOrdersEl.innerHTML = appState.orders.length === 0
+                    ? `<div class="text-xs text-slate-400">No customer orders yet.</div>`
+                    : appState.orders.map(o => `
+                        <div class="bg-[#090e1c] border border-slate-800 rounded-xl p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                            <div>
+                                <div class="text-xs text-indigo-400 font-bold">${o.id} • Customer: <span class="text-white">${o.userName}</span> (${o.date})</div>
+                                <div class="text-sm font-extrabold text-white mt-0.5">${o.product} — ${o.plan} (৳${o.price})</div>
+                                <div class="text-xs text-slate-400">UID/Device: ${o.uid} • Status: <span class="text-emerald-400 font-bold">${o.status}</span></div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <input type="text" id="adminKeyInput_${o.id}" value="${o.licenseKey}" class="bg-[#050811] border border-slate-700 rounded-lg px-3 py-1.5 text-xs font-mono text-emerald-400 w-48 sm:w-56">
+                                <button onclick="adminUpdateOrderKey('${o.id}')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shrink-0">
+                                    Save & Approve Key
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+
+                // Admin Deposits List
+                const adminDepsEl = document.getElementById('adminDepositsContainer');
+                adminDepsEl.innerHTML = appState.deposits.length === 0
+                    ? `<div class="text-xs text-slate-400">No deposit requests yet.</div>`
+                    : appState.deposits.map(d => `
+                        <div class="bg-[#090e1c] border border-slate-800 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div>
+                                <div class="text-xs font-bold text-slate-300">Serial #${d.serial} • User: <span class="text-white">${d.userName || 'Gamer'}</span></div>
+                                <div class="text-sm font-extrabold text-amber-400 mt-0.5">৳${d.amount} <span class="text-xs font-normal text-slate-400">via ${d.method} (Sender: ${d.senderPhone || 'N/A'})</span></div>
+                                <div class="text-[11px] text-slate-500">${d.date} • Status: <strong class="text-white">${d.status}</strong></div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                ${d.status === 'Under Verification' ? `
+                                    <button onclick="adminApproveDeposit('${d.serial}')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold">
+                                        Approve +৳${d.amount}
+                                    </button>
+                                    <button onclick="adminRejectDeposit('${d.serial}')" class="px-3 py-1.5 rounded-lg bg-rose-600/25 hover:bg-rose-600/40 text-rose-400 text-xs font-bold">
+                                        Reject
+                                    </button>
+                                ` : `<span class="px-2.5 py-1 rounded-lg bg-slate-800 text-xs font-bold text-slate-300">${d.status}</span>`}
+                            </div>
+                        </div>
+                    `).join('');
+
+                // Populate Site Settings inputs
+                document.getElementById('setAnnouncement').value = appState.settings.announcement || '';
+                document.getElementById('setTelegramUrl').value = appState.settings.telegramUrl || '';
+                document.getElementById('setWhatsappNum').value = appState.settings.whatsappNum || '';
+                document.getElementById('setBkashNum').value = appState.settings.bkashNum || '';
+                document.getElementById('setNagadNum').value = appState.settings.nagadNum || '';
+            }
+
+            // Latest Orders Feed
+            const latestGrid = document.getElementById('latestOrdersGrid');
+            latestGrid.innerHTML = appState.latestOrders.slice(0, 6).map(item => `
+                <div class="glass-card rounded-xl px-4 py-3 flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <div class="w-9 h-9 rounded-full bg-indigo-600/25 border border-indigo-500/40 text-indigo-300 font-extrabold text-xs flex items-center justify-center shrink-0">
+                            ${item.user.charAt(0).toUpperCase()}
+                        </div>
+                        <div class="truncate">
+                            <div class="text-xs sm:text-sm font-bold text-white truncate">${item.user}</div>
+                            <div class="text-[11px] text-slate-400 truncate">${item.product}</div>
+                        </div>
+                    </div>
+                    <div class="text-right shrink-0">
+                        <div class="text-xs sm:text-sm font-black text-white">৳${item.price}</div>
+                        <div class="text-[10px] font-bold text-emerald-400">Completed</div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Leaderboard
+            const lbGrid = document.getElementById('leaderboardGrid');
+            lbGrid.innerHTML = LEADERBOARD_DATA.map(row => {
+                const rankBadge = row.rank === 1
+                    ? 'bg-amber-500/20 text-amber-400 border-amber-500/40'
+                    : row.rank === 2
+                    ? 'bg-slate-400/20 text-slate-200 border-slate-400/40'
+                    : row.rank === 3
+                    ? 'bg-orange-600/20 text-orange-400 border-orange-500/40'
+                    : 'bg-slate-800 text-slate-400 border-slate-700';
+                return `
+                    <div class="glass-card rounded-xl px-4 py-3 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="w-7 h-7 rounded-lg border ${rankBadge} text-xs font-black flex items-center justify-center">
+                                ${row.rank}
+                            </span>
+                            <div>
+                                <div class="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
+                                    ${row.name} ${row.rank === 1 ? '<i class="fa-solid fa-crown text-amber-400 text-xs"></i>' : ''}
+                                </div>
+                                <div class="text-[10px] text-slate-400">Total Spent</div>
+                            </div>
+                        </div>
+                        <div class="text-sm font-black text-indigo-400">৳${row.spent.toLocaleString()}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Initial Render on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            syncAllUI();
+        });
+    </script>
+</body>
+</html>
